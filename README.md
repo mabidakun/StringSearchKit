@@ -10,8 +10,8 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
 #### Usage:
 
    - `StringDictionary(withStrings: [String])`
-   - `StringDictionary(withTextFileNamed: <A name of a text in your Bundle>)`
-   - `StringDictionary(withTextFilepath: <the path to a text file>)`
+   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>)`
+   - `StringDictionary(withTextFilepath: <The path to a text file>)`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.
 
