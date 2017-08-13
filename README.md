@@ -14,9 +14,12 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
    - `StringDictionary(withTextFilepath: <the path to a text file>)`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.
-The file should simply contain one string per-line.
 
-For example:
+When initialising from a file, it should simply contain one string per-line.
+
+Strings are not limited to being single words - but are in the examples, for simplicity.
+
+Example file contents :-
 ```
 act
 apologise
