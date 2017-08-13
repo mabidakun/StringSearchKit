@@ -24,7 +24,7 @@ import Foundation
 
 class Trie {
 
-    var node = TrieNode(withValue: "#");
+    let node = TrieNode(withValue: "#");
 
     func add(string aString: String) {
         
