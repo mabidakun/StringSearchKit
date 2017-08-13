@@ -1,5 +1,5 @@
 # StringSearchKit
-A simple framework for macOS™ & iOS™ - enabling fast, in memory, prefix based, string searching.
+A simple framework for macOS™ - enabling fast, in memory, prefix based, string searching.
 
 ### Why is this framework useful?
 
