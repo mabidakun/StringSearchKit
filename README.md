@@ -1,9 +1,9 @@
 # StringSearchKit
-A simple framework for macOS & iOS - enabling fast, in memory, prefix based, string searching.
+A simple framework for macOS™ & iOS™ - enabling fast, in memory, prefix based, string searching.
 
 ### What is this framework useful?
 
-Because, this simple framework makes it really easy to implement Auto-Complete functionality.
+Because it makes it really easy to implement **Auto-Complete** functionality in an application - as I did in my macOS™ app - [Sequence Diagram](https://itunes.apple.com/gb/app/sequence-diagram/id1195426709?mt=12) 
 
 ### How do I get started?
 
