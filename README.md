@@ -20,6 +20,7 @@ The file should simply contain one string per-line.
 
 For example:
 ```
+act
 apologise
 apology
 app
@@ -29,8 +30,8 @@ apple
 Once instantiated, use the `StringDictionary` to quickly find strings (case-insensitively) with a given prefix.
 
 ```
-let stringDictionary = StringDictionary(withStrings: ["app", "bob", "bobby", "bobbing"])
-let searchResults = stringDictionary.strings(withPrefix: "bobb")
+let stringDictionary = StringDictionary(withStrings: ["act", "app", "apple", "apologise", "apology"])
+let searchResults = stringDictionary.strings(withPrefix: "app")
 
-// searchResults will then contain ["bobbing", "bobby"]
+// searchResults will then contain ["app", "apple"]
 ```
