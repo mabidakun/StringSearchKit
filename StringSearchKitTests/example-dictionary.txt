@@ -1,0 +1,13 @@
+activate
+alt
+as
+deactivate
+else
+end
+loop
+neg
+note
+opt
+par
+participant
+region
