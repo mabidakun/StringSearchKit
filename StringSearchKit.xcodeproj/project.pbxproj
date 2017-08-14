@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		270725B91F36166400FE76DD /* StringSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270725AF1F36166300FE76DD /* StringSearchKit.framework */; };
-		270725C01F36166400FE76DD /* StringSearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 270725B21F36166300FE76DD /* StringSearchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		270725D01F36175100FE76DD /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270725CA1F36175100FE76DD /* String+Additions.swift */; };
 		270725D11F36175100FE76DD /* StringDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270725CB1F36175100FE76DD /* StringDictionary.swift */; };
 		270725D21F36175100FE76DD /* StringDictionaryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270725CC1F36175100FE76DD /* StringDictionaryType.swift */; };
@@ -35,22 +34,22 @@
 
 /* Begin PBXFileReference section */
 		270725AF1F36166300FE76DD /* StringSearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringSearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		270725B21F36166300FE76DD /* StringSearchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringSearchKit.h; path = StringSearchKit/StringSearchKit.h; sourceTree = SOURCE_ROOT; };
+		270725B21F36166300FE76DD /* StringSearchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringSearchKit.h; path = StringSearchKit/Classes/StringSearchKit.h; sourceTree = SOURCE_ROOT; };
 		270725B31F36166300FE76DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = StringSearchKit/Info.plist; sourceTree = SOURCE_ROOT; };
 		270725B81F36166400FE76DD /* StringSearchKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringSearchKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		270725BF1F36166400FE76DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		270725CA1F36175100FE76DD /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Additions.swift"; path = "StringSearchKit/String+Additions.swift"; sourceTree = SOURCE_ROOT; };
-		270725CB1F36175100FE76DD /* StringDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDictionary.swift; path = StringSearchKit/StringDictionary.swift; sourceTree = SOURCE_ROOT; };
-		270725CC1F36175100FE76DD /* StringDictionaryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDictionaryType.swift; path = StringSearchKit/StringDictionaryType.swift; sourceTree = SOURCE_ROOT; };
-		270725CD1F36175100FE76DD /* StringLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringLoader.swift; path = StringSearchKit/StringLoader.swift; sourceTree = SOURCE_ROOT; };
-		270725CE1F36175100FE76DD /* Trie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trie.swift; path = StringSearchKit/Trie.swift; sourceTree = SOURCE_ROOT; };
-		270725CF1F36175100FE76DD /* TrieNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrieNode.swift; path = StringSearchKit/TrieNode.swift; sourceTree = SOURCE_ROOT; };
+		270725CA1F36175100FE76DD /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Additions.swift"; path = "StringSearchKit/Classes/String+Additions.swift"; sourceTree = SOURCE_ROOT; };
+		270725CB1F36175100FE76DD /* StringDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDictionary.swift; path = StringSearchKit/Classes/StringDictionary.swift; sourceTree = SOURCE_ROOT; };
+		270725CC1F36175100FE76DD /* StringDictionaryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringDictionaryType.swift; path = StringSearchKit/Classes/StringDictionaryType.swift; sourceTree = SOURCE_ROOT; };
+		270725CD1F36175100FE76DD /* StringLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringLoader.swift; path = StringSearchKit/Classes/StringLoader.swift; sourceTree = SOURCE_ROOT; };
+		270725CE1F36175100FE76DD /* Trie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trie.swift; path = StringSearchKit/Classes/Trie.swift; sourceTree = SOURCE_ROOT; };
+		270725CF1F36175100FE76DD /* TrieNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrieNode.swift; path = StringSearchKit/Classes/TrieNode.swift; sourceTree = SOURCE_ROOT; };
 		270725D61F36178400FE76DD /* StringDictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDictionaryTests.swift; sourceTree = "<group>"; };
 		270725D71F36178400FE76DD /* StringLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLoaderTests.swift; sourceTree = "<group>"; };
 		270725D81F36178400FE76DD /* TrieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieTests.swift; sourceTree = "<group>"; };
 		270725DD1F3618C100FE76DD /* example-dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "example-dictionary.txt"; path = "StringSearchKitTests/example-dictionary.txt"; sourceTree = SOURCE_ROOT; };
 		270725DF1F361B5700FE76DD /* StringSearchKitTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringSearchKitTestHelper.swift; sourceTree = "<group>"; };
-		2785A8491F40E33B00157A5B /* Sequence+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Additions.swift"; sourceTree = "<group>"; };
+		2785A8491F40E33B00157A5B /* Sequence+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Sequence+Additions.swift"; path = "Classes/Sequence+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +168,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				270725C01F36166400FE76DD /* StringSearchKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +353,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -401,6 +400,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
