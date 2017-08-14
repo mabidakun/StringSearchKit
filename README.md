@@ -1,5 +1,28 @@
 # StringSearchKit
+
 A simple framework for macOS™ - enabling fast, in memory, prefix based, string searching.
+
+
+[![CI Status](http://img.shields.io/travis/mabidakun/StringSearchKit.svg?style=flat)](https://travis-ci.org/mabidakun/StringSearchKit)
+[![Version](https://img.shields.io/cocoapods/v/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
+[![License](https://img.shields.io/cocoapods/l/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
+[![Platform](https://img.shields.io/cocoapods/p/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Requirements
+
+## Installation
+
+StringSearchKit is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod "StringSearchKit"
+```
+
 
 ### Why is this framework useful?
 
@@ -36,3 +59,12 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 
 // searchResults will then contain ["app", "apple"]
 ```
+
+## Author
+
+**Mike O. Abidakun** `github@mikeosoft.co.uk`
+
+## License
+
+StringSearchKit is available under the MIT license. See the LICENSE file for more info.
+

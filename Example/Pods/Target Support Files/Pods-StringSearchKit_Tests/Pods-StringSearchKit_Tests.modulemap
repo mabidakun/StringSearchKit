@@ -1,0 +1,6 @@
+framework module Pods_StringSearchKit_Tests {
+  umbrella header "Pods-StringSearchKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

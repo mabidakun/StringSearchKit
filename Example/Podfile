@@ -1,0 +1,6 @@
+use_frameworks!
+target 'StringSearchKit_Tests' do
+  pod 'StringSearchKit', :path => '../'
+  
+  
+end

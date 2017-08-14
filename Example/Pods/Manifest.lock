@@ -1,0 +1,16 @@
+PODS:
+  - StringSearchKit (0.1.0)
+
+DEPENDENCIES:
+  - StringSearchKit (from `../`)
+
+EXTERNAL SOURCES:
+  StringSearchKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  StringSearchKit: e24687765a829ed9083e47c3590efcb814592689
+
+PODFILE CHECKSUM: 96c89b6afed50452ae613a2089c7d20ab3a31433
+
+COCOAPODS: 1.2.0

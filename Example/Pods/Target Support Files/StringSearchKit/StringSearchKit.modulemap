@@ -1,0 +1,6 @@
+framework module StringSearchKit {
+  umbrella header "StringSearchKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
