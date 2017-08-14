@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: A simple framework that enable fast, in memory, prefix based, string searching using a Trie data strucutre.
+                       A simple framework that enable fast, in memory, prefix based, string searching using a Trie data strucutre.
                        DESC
 
   s.homepage         = 'https://github.com/mabidakun/StringSearchKit'
