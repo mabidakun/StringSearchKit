@@ -8,12 +8,11 @@ A simple framework for macOS™ - enabling fast, in memory, prefix based, string
 [![License](https://img.shields.io/cocoapods/l/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
 [![Platform](https://img.shields.io/cocoapods/p/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
-
+   - macOS 10.11+
+   - iOS 8+
+   - tvOS 9+
+   
 ## Installation
 
 StringSearchKit is available through [CocoaPods](http://cocoapods.org). To install
