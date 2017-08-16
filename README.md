@@ -15,7 +15,7 @@ A simple framework for macOS™ - enabling fast, in memory, prefix based, string
    
 ## Installation
 
-StringSearchKit is available through [CocoaPods](https://github.com/mabidakun/StringSearchKit). To install
+StringSearchKit is available through [CocoaPods](https://cocoapods.org/?q=stringsearchkit). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
