@@ -16,11 +16,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		27892C951F419674009974B2 /* StringSearchKitTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSearchKitTestHelper.swift; sourceTree = "<group>"; };
-		27892C961F419674009974B2 /* StringLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLoaderTests.swift; sourceTree = "<group>"; };
-		27892C971F419674009974B2 /* StringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDictionaryTests.swift; sourceTree = "<group>"; };
-		27892C981F419674009974B2 /* example-dictionary.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "example-dictionary.txt"; sourceTree = "<group>"; };
-		27892C991F419674009974B2 /* TrieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrieTests.swift; sourceTree = "<group>"; };
+		27892C951F419674009974B2 /* StringSearchKitTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringSearchKitTestHelper.swift; path = ../../StringSearchKitTests/StringSearchKitTestHelper.swift; sourceTree = "<group>"; };
+		27892C961F419674009974B2 /* StringLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringLoaderTests.swift; path = ../../StringSearchKitTests/StringLoaderTests.swift; sourceTree = "<group>"; };
+		27892C971F419674009974B2 /* StringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringDictionaryTests.swift; path = ../../StringSearchKitTests/StringDictionaryTests.swift; sourceTree = "<group>"; };
+		27892C981F419674009974B2 /* example-dictionary.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "example-dictionary.txt"; path = "../../StringSearchKitTests/example-dictionary.txt"; sourceTree = "<group>"; };
+		27892C991F419674009974B2 /* TrieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrieTests.swift; path = ../../StringSearchKitTests/TrieTests.swift; sourceTree = "<group>"; };
 		2DC2CDFFCE946FA692840164 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		37827EB488A534A038B74F2C /* Pods-StringSearchKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StringSearchKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StringSearchKit_Tests/Pods-StringSearchKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		47D0B8183BDF2E8A131123AA /* Pods-StringSearchKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StringSearchKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StringSearchKit_Tests/Pods-StringSearchKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
