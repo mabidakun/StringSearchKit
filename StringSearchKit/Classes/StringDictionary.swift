@@ -50,7 +50,7 @@ public class StringDictionary: StringDictionaryType {
         return stringStore.contains(string: aString)
     }
     
-    public func strings(withPrefix prefix: String = "") -> [String] {
+    public func strings(withPrefix prefix: String) -> [String] {
         return stringStore.strings(withPrefix: prefix)
     }
 }

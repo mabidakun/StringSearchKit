@@ -37,7 +37,7 @@ class StringDictionaryTests: XCTestCase {
         let strings = ["a", "c", "b"]
         wordDictionary = StringDictionary(withStrings: strings)
         
-        XCTAssertEqual(strings.sorted(), wordDictionary.strings())
+        XCTAssertEqual(strings.sorted(), wordDictionary.strings(withPrefix: ""))
     }
     
     // MARK:- contains
@@ -123,13 +123,6 @@ class StringDictionaryTests: XCTestCase {
         
         XCTAssertEqual(expected, actual)
     }
-
-    func testStringsWithPrefix_NoString_ReturnsAllEntries() {
-        let expected = allWords()
-        let actual = wordDictionary.strings()
-        
-        XCTAssertEqual(expected, actual)
-    }
     
     func testAdd_ArrayToExisting_ContainsExpected() {
         XCTAssertTrue(wordDictionary.contains(string: "alt"))
@@ -139,8 +132,6 @@ class StringDictionaryTests: XCTestCase {
         
         XCTAssertTrue(wordDictionary.contains(string: "alt"))
         XCTAssertTrue(wordDictionary.contains(string: "alice"))
-        XCTAssertTrue(wordDictionary.contains(string: "bob"))
-        XCTAssertTrue(wordDictionary.contains(string: "charlie"))
     }
 }
 
