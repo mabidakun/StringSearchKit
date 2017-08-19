@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		270725AF1F36166300FE76DD /* StringSearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringSearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		270725B21F36166300FE76DD /* StringSearchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringSearchKit.h; path = StringSearchKit/Classes/StringSearchKit.h; sourceTree = SOURCE_ROOT; };
+		270725B21F36166300FE76DD /* StringSearchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringSearchKit.h; path = StringSearchKit/StringSearchKit.h; sourceTree = SOURCE_ROOT; };
 		270725B31F36166300FE76DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = StringSearchKit/Info.plist; sourceTree = SOURCE_ROOT; };
 		270725B81F36166400FE76DD /* StringSearchKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringSearchKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		270725BF1F36166400FE76DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
