@@ -37,7 +37,11 @@ public class StringDictionary: StringDictionaryType {
     public init(withTextFilepath filepath: String) {
         populate(fromTextFilepath: filepath)
     }
-
+    
+    public func add(strings theStrings: [String]) {
+        stringStore.add(strings: theStrings)
+    }
+    
     public func add(string aString: String) {
         stringStore.add(string: aString)
     }

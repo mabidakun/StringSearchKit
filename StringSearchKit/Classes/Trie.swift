@@ -46,6 +46,12 @@ class Trie {
         
         current.isTerminating = true
     }
+    
+    func add(strings theStrings: [String]) {
+        theStrings.forEach { (string) in
+            self.add(string: string)
+        }
+    }
 
     func remove(string theString: String) {
         remove(string: theString.normalized(), node: node)
@@ -148,4 +154,4 @@ fileprivate extension Trie {
     }
 }
 
-extension Trie: StringDictionaryType { }
+extension Trie: StringDictionaryType {}

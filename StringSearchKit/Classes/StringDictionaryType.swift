@@ -24,6 +24,7 @@ import Foundation
 
 protocol StringDictionaryType {
     func add(string aString: String)
+    func add(strings theStrings: [String])
     func contains(string aString: String) -> Bool
     func strings(withPrefix prefix: String) -> [String]
 }

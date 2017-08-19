@@ -130,8 +130,23 @@ class StringDictionaryTests: XCTestCase {
         
         XCTAssertEqual(expected, actual)
     }
+    
+    func testAdd_ArrayToExisting_ContainsExpected() {
+        XCTAssertTrue(wordDictionary.contains(string: "alt"))
+        XCTAssertFalse(wordDictionary.contains(string: "alice"))
+        
+        wordDictionary.add(strings: ["alice", "bob", "charlie"])
+        
+        XCTAssertTrue(wordDictionary.contains(string: "alt"))
+        XCTAssertTrue(wordDictionary.contains(string: "alice"))
+        XCTAssertTrue(wordDictionary.contains(string: "bob"))
+        XCTAssertTrue(wordDictionary.contains(string: "charlie"))
+    }
+}
 
-    fileprivate func allWords() -> [String] {
+fileprivate extension StringDictionaryTests {
+    
+    func allWords() -> [String] {
         return ["activate", "alt", "as", "deactivate", "else", "end", "loop", "neg", "note", "opt", "par", "participant", "region"]
     }
 }
