@@ -49,6 +49,7 @@
 		270725D81F36178400FE76DD /* TrieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieTests.swift; sourceTree = "<group>"; };
 		270725DD1F3618C100FE76DD /* example-dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "example-dictionary.txt"; path = "StringSearchKitTests/example-dictionary.txt"; sourceTree = SOURCE_ROOT; };
 		270725DF1F361B5700FE76DD /* StringSearchKitTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringSearchKitTestHelper.swift; sourceTree = "<group>"; };
+		272647A91F48C6F60084394D /* StringSearchKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = StringSearchKit.podspec; sourceTree = "<group>"; };
 		2785A8491F40E33B00157A5B /* Sequence+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Sequence+Additions.swift"; path = "Classes/Sequence+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +75,7 @@
 		270725A51F36166300FE76DD = {
 			isa = PBXGroup;
 			children = (
+				272647AA1F48C6FA0084394D /* CocoaPods */,
 				270725E41F361FE000FE76DD /* Framework */,
 				270725B11F36166300FE76DD /* StringSearchKit */,
 				270725BC1F36166400FE76DD /* StringSearchKitTests */,
@@ -159,6 +161,14 @@
 				270725E31F361FAE00FE76DD /* Protocols */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		272647AA1F48C6FA0084394D /* CocoaPods */ = {
+			isa = PBXGroup;
+			children = (
+				272647A91F48C6F60084394D /* StringSearchKit.podspec */,
+			);
+			name = CocoaPods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
