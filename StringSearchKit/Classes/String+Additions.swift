@@ -38,6 +38,7 @@ extension String {
     
     func byChompingHead() -> String {
         guard self.characters.count > 0 else { return "" }
-        return self.substring(from: self.index(self.startIndex, offsetBy: 1))
+        let newIndex = self.index(self.startIndex, offsetBy: 1)
+        return String(self[newIndex...])
     }
 }
