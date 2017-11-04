@@ -25,11 +25,11 @@ import Foundation
 extension String {
 
     var hasMoreCharacters: Bool {
-        return self.characters.count > 0
+        return self.count > 0
     }
     
     var firstCharacter: Character? {
-        return self.characters.first
+        return self.first
     }
 
     func normalized() -> String {
@@ -37,7 +37,7 @@ extension String {
     }
     
     func byChompingHead() -> String {
-        guard self.characters.count > 0 else { return "" }
+        guard self.count > 0 else { return "" }
         let newIndex = self.index(self.startIndex, offsetBy: 1)
         return String(self[newIndex...])
     }
