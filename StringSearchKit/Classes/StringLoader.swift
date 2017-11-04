@@ -47,7 +47,7 @@ fileprivate extension StringLoader {
     
     static func loadTextFile(named name: String) -> String? {
         
-        guard name.trimmingCharacters(in: .whitespacesAndNewlines).characters.count > 0,
+        guard name.trimmingCharacters(in: .whitespacesAndNewlines).count > 0,
             let filepath = Bundle(for: self).path(forResource: name, ofType: "txt") else {
             return nil
         }

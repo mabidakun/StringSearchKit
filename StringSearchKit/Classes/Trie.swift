@@ -35,7 +35,7 @@ class Trie {
         let string = aString.normalized()
         
         var current = self.node
-        string.characters.forEach { (character) in
+        string.forEach { (character) in
             if let next = current.nodes[character] {
                 current = next
                 return
@@ -63,7 +63,7 @@ class Trie {
 
         let word = aString.normalized()
         
-        for character in word.characters {
+        for character in word {
             
             current = current?.nodes[character]
             if nil == current {
