@@ -1,6 +1,6 @@
 # StringSearchKit
 
-A simple framework for macOS™ - enabling fast, in memory, prefix based, string searching.
+A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, string searching, using a Trie.
 
 
 [![CI Status](http://img.shields.io/travis/mabidakun/StringSearchKit.svg?style=flat)](https://travis-ci.org/mabidakun/StringSearchKit)

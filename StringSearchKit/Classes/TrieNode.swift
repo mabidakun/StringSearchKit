@@ -1,4 +1,4 @@
-//
+    //
 //  Created by Mike O. Abidakun 2017.
 //  Copyright (c) 2017-Present Mike O. Abidakun. All rights reserved.
 //
@@ -25,7 +25,7 @@ import Foundation
 class TrieNode: CustomStringConvertible {
     
     let value: Character
-    var parent: TrieNode?
+    weak var parent: TrieNode?
     var nodes: [Character: TrieNode] = [:]
     var isTerminating = false
     
