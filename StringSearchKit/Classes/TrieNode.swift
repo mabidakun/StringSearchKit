@@ -46,7 +46,7 @@ class TrieNode: CustomStringConvertible {
         parent?.nodes[value] = nil
     }
     
-    @discardableResult static func new(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
+    @discardableResult static func make(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
         
         let childNode = TrieNode(withValue: character, parent: parent)
         

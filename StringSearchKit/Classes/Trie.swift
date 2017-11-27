@@ -41,7 +41,7 @@ class Trie {
                 return
             }
 
-            current = TrieNode.new(withCharacter: character, parent: current)
+            current = TrieNode.make(withCharacter: character, parent: current)
         }
         
         current.isTerminating = true

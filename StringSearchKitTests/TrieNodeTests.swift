@@ -83,28 +83,28 @@ class TrieNodeTests: XCTestCase {
     
     func testTrieNode_AddChild_NodeCountIs1() {
         let parent = TrieNode(withValue: "a")
-        TrieNode.new(withCharacter: "b", parent: parent)
+        TrieNode.make(withCharacter: "b", parent: parent)
 
         XCTAssertEqual(1, parent.nodes.count)
     }
 
     func testTrieNode_AddChild_ParentCanDeleteIsFalse() {
         let parent = TrieNode(withValue: "a")
-        TrieNode.new(withCharacter: "b", parent: parent)
+        TrieNode.make(withCharacter: "b", parent: parent)
         
         XCTAssertFalse(parent.canDelete)
     }
     
     func testTrieNode_DeleteChild_NodeCountIs0() {
         let parent = TrieNode(withValue: "a")
-        TrieNode.new(withCharacter: "b", parent: parent).delete()
+        TrieNode.make(withCharacter: "b", parent: parent).delete()
 
         XCTAssertEqual(0, parent.nodes.count)
     }
     
     func testTrieNode_DeleteChild_ParentCanDeleteIsTrue() {
         let parent = TrieNode(withValue: "a")
-        TrieNode.new(withCharacter: "b", parent: parent).delete()
+        TrieNode.make(withCharacter: "b", parent: parent).delete()
         
         XCTAssertTrue(parent.canDelete)
     }
@@ -112,7 +112,7 @@ class TrieNodeTests: XCTestCase {
     func testTrieNode_ParentIsTerminating_DeleteChild_ParentCanDeleteIsFalse() {
         let parent = TrieNode(withValue: "a")
         parent.isTerminating = true
-        TrieNode.new(withCharacter: "b", parent: parent).delete()
+        TrieNode.make(withCharacter: "b", parent: parent).delete()
         
         XCTAssertFalse(parent.canDelete)
     }
@@ -120,7 +120,7 @@ class TrieNodeTests: XCTestCase {
     // Retain Cycle Test
     func testTrieNode_ReassignParent_ChildNodeDoesNotRetainParent() {
         var parent: TrieNode? = TrieNode(withValue: "a")
-        let child = TrieNode.new(withCharacter: "b", parent: parent)
+        let child = TrieNode.make(withCharacter: "b", parent: parent)
         parent = nil
       
         XCTAssertNil(child.parent)
