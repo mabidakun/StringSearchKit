@@ -1,4 +1,4 @@
-    //
+//
 //  Created by Mike O. Abidakun 2017.
 //  Copyright (c) 2017-Present Mike O. Abidakun. All rights reserved.
 //
@@ -46,7 +46,7 @@ class TrieNode: CustomStringConvertible {
         parent?.nodes[value] = nil
     }
     
-    static func new(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
+    @discardableResult static func new(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
         
         let childNode = TrieNode(withValue: character, parent: parent)
         
