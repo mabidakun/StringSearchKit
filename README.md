@@ -31,9 +31,9 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
 
 #### Usage:
 
-   - `StringDictionary(withStrings: [String])`
-   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>)`
-   - `StringDictionary(withTextFilepath: <The path to a text file>)`
+   - `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
+   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, preserveCase: Bool = false)`
+   - `StringDictionary(withTextFilepath: <The path to a text file>), preserveCase: Bool = false`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.
 
@@ -58,6 +58,23 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 
 // searchResults will then contain ["app", "apple"]
 ```
+
+### What's new in 0.0.7?
+
+Case preservation.
+
+If you set `preserveCase: true` in any of the `init` methods (default is `false` for backwards compatibility), the results will be returned in the same case that the original words were in when added.
+
+
+For example:
+
+```
+let stringDictionary = StringDictionary(withStrings: ["Act", "App", "Apple", "Apologise", "Apology"], preserveCase: true)
+let searchResults = stringDictionary.strings(withPrefix: "app")
+
+// searchResults will then contain ["App", "Apple"]
+```
+
 
 ## Author
 
