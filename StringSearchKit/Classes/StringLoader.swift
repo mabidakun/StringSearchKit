@@ -22,9 +22,9 @@
 
 import Foundation
 
-class StringLoader {
+public class StringLoader {
     
-    static func load(withFilepath path: String) -> [String] {
+    public static func load(withFilepath path: String) -> [String] {
         
         guard let contents = try? String(contentsOfFile: path).trimmingCharacters(in: .whitespacesAndNewlines) else {
             return []
@@ -33,7 +33,7 @@ class StringLoader {
         return contents.components(separatedBy: .newlines)
     }
 
-    static func load(fromTextFileNamed name: String) -> [String] {
+    public static func load(fromTextFileNamed name: String) -> [String] {
         
         guard let contents = loadTextFile(named: name) else {
             return []
