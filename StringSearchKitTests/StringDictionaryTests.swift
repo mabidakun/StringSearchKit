@@ -100,7 +100,7 @@ class StringDictionaryTests: XCTestCase {
     }
 
     func testContains_NotAddedString_ReturnsFalse() {
-        XCTAssertFalse(wordDictionary.contains(string: "sequence diagram"))
+        XCTAssertFalse(wordDictionary.contains(string: "http://www.macsequencediagram.com"))
     }
     
     func testStringsWithPrefix_Par_ReturnsTwoStrings() {
@@ -132,6 +132,77 @@ class StringDictionaryTests: XCTestCase {
         
         XCTAssertTrue(wordDictionary.contains(string: "alt"))
         XCTAssertTrue(wordDictionary.contains(string: "alice"))
+    }
+    
+    // MARK:- Case preservation
+    func testInitWithStrings_NotSpecified_PreserveCaseIsFalse() {
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+    
+    func testInitWithStrings_PreserveCaseFalse_ReturnsFalse() {
+        let wordDictionary = StringDictionary(withStrings: [], preserveCase: false)
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+
+    func testInitWithStrings_PreserveCaseTrue_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withStrings: [], preserveCase: true)
+        XCTAssertTrue(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFilePath_NotSpecified_PreserveCaseIsFalse() {
+        let wordDictionary = StringDictionary(withTextFilepath: StringSearchKitTestHelper.exampleFilepath)
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFilePath_PreserveCaseFalse_ReturnsFalse() {
+        let wordDictionary = StringDictionary(withTextFilepath: StringSearchKitTestHelper.exampleFilepath,
+                                              preserveCase: false)
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFilePath_PreserveCaseTrue_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withTextFilepath: StringSearchKitTestHelper.exampleFilepath,
+                                              preserveCase: true)
+        XCTAssertTrue(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFileNamed_NotSpecified_PreserveCaseIsFalse() {
+        let wordDictionary = StringDictionary(withTextFileNamed: StringSearchKitTestHelper.exampleTextFileName)
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFileNamed_PreserveCaseFalse_ReturnsFalse() {
+        let wordDictionary = StringDictionary(withTextFileNamed: StringSearchKitTestHelper.exampleTextFileName,
+                                              preserveCase: false)
+        XCTAssertFalse(wordDictionary.preservesCase)
+    }
+
+    func testInitWithTextFileNamed_PreserveCaseTrue_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withTextFileNamed: StringSearchKitTestHelper.exampleTextFileName,
+                                              preserveCase: true)
+        XCTAssertTrue(wordDictionary.preservesCase)
+    }
+    
+    func testContains_PreservesCase_Activate_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withStrings: ["Activate"], preserveCase: true)
+
+        XCTAssertTrue(wordDictionary.contains(string: "activate"))
+    }
+
+    func testStringsWithPrefix_PreservesCase_Activate_ReturnsActivateInExpectedCase() {
+        let expected = ["Activate"]
+        let wordDictionary = StringDictionary(withStrings: expected, preserveCase: true)
+        let actual = wordDictionary.strings(withPrefix: expected[0])
+        
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testStringsWithPrefix_PreservesCase_Par_ReturnsTwoStringsWithExpectedCase() {
+        let expected = ["Par", "Participant"]
+        let wordDictionary = StringDictionary(withStrings: expected, preserveCase: true)
+        let actual = wordDictionary.strings(withPrefix: "par")
+        
+        XCTAssertEqual(expected, actual)
     }
 }
 

@@ -35,4 +35,8 @@ class StringSearchKitTestHelper {
         
         return path
     }
+    
+    static var exampleTextFileName: String {
+        return DictionaryTextFilename
+    }
 }

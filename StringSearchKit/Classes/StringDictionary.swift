@@ -24,52 +24,74 @@ import Foundation
 
 public class StringDictionary: StringDictionaryType {
  
+    fileprivate (set) var preservesCase = false
     fileprivate let stringStore = Trie()
     
-    public init(withStrings strings: [String]) {
+    lazy var wordMap: [String : String] = {
+        return [:]
+    }()
+    
+    // MARK:- Initialisers
+    
+    public init(withStrings strings: [String], preserveCase: Bool = false) {
+        self.preservesCase = preserveCase
         populate(withString: strings)
     }
     
-    public init(withTextFileNamed filename: String) {
-        populate(fromTextFileNamed: filename)
+    public convenience init(withTextFileNamed filename: String, preserveCase: Bool = false) {
+        self.init(withStrings: StringLoader.load(fromTextFileNamed: filename), preserveCase: preserveCase)
     }
 
-    public init(withTextFilepath filepath: String) {
-        populate(fromTextFilepath: filepath)
+    public convenience init(withTextFilepath filepath: String, preserveCase: Bool = false) {
+        self.init(withStrings: StringLoader.load(withFilepath: filepath), preserveCase: preserveCase)
     }
     
-    public func add(strings theStrings: [String]) {
-        stringStore.add(strings: theStrings)
+    // MARK:- add
+    
+    public func add(strings: [String]) {
+        stringStore.add(strings: strings)
     }
     
-    public func add(string aString: String) {
-        stringStore.add(string: aString)
+    public func add(string: String) {
+        stringStore.add(string: string)
     }
 
-    public func contains(string aString: String) -> Bool {
-        return stringStore.contains(string: aString)
+    public func contains(string: String) -> Bool {
+        return stringStore.contains(string: string)
     }
     
     public func strings(withPrefix prefix: String) -> [String] {
-        return stringStore.strings(withPrefix: prefix)
+        let results = stringStore.strings(withPrefix: prefix)
+        return preservesCase ? originalCaseWords(for: results) : results
     }
 }
 
 fileprivate extension StringDictionary {
-    
-    func populate(fromTextFileNamed name: String) {
-        
-        let strings = StringLoader.load(fromTextFileNamed: name)
-        populate(withString: strings)
-    }
 
-    func populate(fromTextFilepath path: String) {
-        
-        let strings = StringLoader.load(withFilepath: path)
-        populate(withString: strings)
-    }
-    
     func populate(withString strings: [String]) {
         strings.addEntries(to: stringStore)
+        
+        if preservesCase {
+            updateWordMap(withSourceWords: strings)
+        }
+    }
+    
+    func updateWordMap(withSourceWords words: [String]) {
+        words.forEach{ (originalWord) in
+            let matchedWords = stringStore.strings(withPrefix: originalWord)
+            let key = originalWord.lowercased()
+            if matchedWords.contains(key){
+                wordMap[key] = originalWord
+            }
+        }
+    }
+    
+    func originalCaseWords(for words:[String]) -> [String] {
+        return words.map { [weak self] (word) -> String in
+            if let originalWord = self?.wordMap[word] {
+                return originalWord
+            }
+            return word
+        }
     }
 }
