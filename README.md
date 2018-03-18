@@ -59,7 +59,7 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 // searchResults will then contain ["app", "apple"]
 ```
 
-###Search Result Case Preservation
+### Search Result Case Preservation
 
 If you set `preserveCase: true` in any of the `init` methods (default is `false` for backwards compatibility), the results will be returned in the same case that the original words were in when added.
 
