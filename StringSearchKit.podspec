@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'StringSearchKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, string searching, using a Trie.'
 
   s.description      = <<-DESC
