@@ -21,6 +21,7 @@
 		270725DE1F3618C100FE76DD /* example-dictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = 270725DD1F3618C100FE76DD /* example-dictionary.txt */; };
 		270725E01F361B5700FE76DD /* StringSearchKitTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270725DF1F361B5700FE76DD /* StringSearchKitTestHelper.swift */; };
 		2785A84A1F40E33B00157A5B /* Sequence+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2785A8491F40E33B00157A5B /* Sequence+Additions.swift */; };
+		27C54D9D21F3387700FDADFD /* String+AdditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C54D9C21F3387700FDADFD /* String+AdditionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		270725DF1F361B5700FE76DD /* StringSearchKitTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringSearchKitTestHelper.swift; sourceTree = "<group>"; };
 		272647A91F48C6F60084394D /* StringSearchKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = StringSearchKit.podspec; sourceTree = "<group>"; };
 		2785A8491F40E33B00157A5B /* Sequence+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Sequence+Additions.swift"; path = "Classes/Sequence+Additions.swift"; sourceTree = "<group>"; };
+		27C54D9C21F3387700FDADFD /* String+AdditionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AdditionsTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +108,14 @@
 		270725BC1F36166400FE76DD /* StringSearchKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				270725DC1F3617DD00FE76DD /* Test Data */,
 				270725BF1F36166400FE76DD /* Info.plist */,
+				27C54D9C21F3387700FDADFD /* String+AdditionsTests.swift */,
 				270725D61F36178400FE76DD /* StringDictionaryTests.swift */,
 				270725D71F36178400FE76DD /* StringLoaderTests.swift */,
 				270725DF1F361B5700FE76DD /* StringSearchKitTestHelper.swift */,
 				27041B621FCCB5F000CA499C /* TrieNodeTests.swift */,
 				270725D81F36178400FE76DD /* TrieTests.swift */,
+				270725DC1F3617DD00FE76DD /* Test Data */,
 			);
 			path = StringSearchKitTests;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C54D9D21F3387700FDADFD /* String+AdditionsTests.swift in Sources */,
 				270725DB1F36178400FE76DD /* TrieTests.swift in Sources */,
 				270725D91F36178400FE76DD /* StringDictionaryTests.swift in Sources */,
 				27041B631FCCB5F000CA499C /* TrieNodeTests.swift in Sources */,

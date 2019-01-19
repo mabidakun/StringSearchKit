@@ -37,8 +37,6 @@ extension String {
     }
     
     func byChompingHead() -> String {
-        guard self.count > 0 else { return "" }
-        let newIndex = self.index(self.startIndex, offsetBy: 1)
-        return String(self[newIndex...])
+        return String(self.dropFirst())
     }
 }
