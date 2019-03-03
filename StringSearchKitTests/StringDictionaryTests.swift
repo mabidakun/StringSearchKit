@@ -25,7 +25,6 @@ import XCTest
 
 class StringDictionaryTests: XCTestCase {
 
-    let DictionaryTextFilename = "example-dictionary"
     var wordDictionary: StringDictionary!
 
     override func setUp() {
