@@ -43,14 +43,22 @@ class TrieNode: CustomStringConvertible {
     }
     
     func delete() {
-        parent?.nodes[value] = nil
+        parent?.delete(for: value)
+    }
+    
+    func delete(for character: Character) {
+        nodes[character] = nil
+    }
+    
+    func add(child: TrieNode, with character: Character) {
+        nodes[character] = child
     }
     
     @discardableResult static func make(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
         
         let childNode = TrieNode(withValue: character, parent: parent)
-        
-        parent?.nodes[character] = childNode
+
+        parent?.add(child: childNode, with: character)
         return childNode
     }
 }
