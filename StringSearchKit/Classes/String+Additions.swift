@@ -25,7 +25,7 @@ import Foundation
 extension String {
 
     var hasMoreCharacters: Bool {
-        return self.count > 0
+        return !isEmpty
     }
     
     var firstCharacter: Character? {
