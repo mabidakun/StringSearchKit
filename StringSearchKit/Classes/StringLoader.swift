@@ -24,34 +24,21 @@ import Foundation
 
 public class StringLoader {
     
+    public static func load(fromTextFileNamed name: String) -> [String] {
+        
+        guard let path = Bundle(for: self).path(forResource: name, ofType: "txt") else {
+            return []
+        }
+        
+        return load(withFilepath: path)
+    }
+
     public static func load(withFilepath path: String) -> [String] {
         
         guard let contents = try? String(contentsOfFile: path).trimmingCharacters(in: .whitespacesAndNewlines) else {
             return []
         }
-        
+
         return contents.components(separatedBy: .newlines)
-    }
-
-    public static func load(fromTextFileNamed name: String) -> [String] {
-        
-        guard let contents = loadTextFile(named: name) else {
-            return []
-        }
-        
-        return contents.components(separatedBy: .newlines)
-    }
-}
-
-fileprivate extension StringLoader {
-    
-    static func loadTextFile(named name: String) -> String? {
-        
-        guard name.trimmingCharacters(in: .whitespacesAndNewlines).count > 0,
-            let filepath = Bundle(for: self).path(forResource: name, ofType: "txt") else {
-            return nil
-        }
-
-        return try? String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
