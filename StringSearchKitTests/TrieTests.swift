@@ -28,9 +28,15 @@ class TrieTests: XCTestCase {
     fileprivate var trie: Trie!
 
     override func setUp() {
+        super.setUp()
         trie = Trie()
     }
 
+    override func tearDown() {
+        trie = nil
+        super.tearDown()
+    }
+    
     // MARK:- addString
     
     func testAddString_EmptyString_ContainsWordIsFalse() {
@@ -69,40 +75,40 @@ class TrieTests: XCTestCase {
         XCTAssertFalse(trie.contains(string: "fixed"))
     }
     
-    // MARK:- containsString
+    // MARK:- contains
 
-    func testContainsString_AfterInit_ReturnsFalse() {
+    func testContains_AfterInit_ReturnsFalse() {
         XCTAssertFalse(trie.contains(string: "word"))
     }
 
-    func testContainsString_NonExistentWord_ReturnsFalse() {
+    func testContains_NonExistentWord_ReturnsFalse() {
         let word = "word"
         trie.add(string: word)
         
         XCTAssertFalse(trie.contains(string: "biscuit"))
     }
     
-    func testContainsString_AddMixedCaseWord_ReturnsTrue() {
+    func testContains_AddMixedCaseWord_ReturnsTrue() {
         trie.add(string: "WoRd")
         XCTAssertTrue(trie.contains(string: "word"))
     }
 
-    func testContainsString_AddMixedCaseWordFindDifferentCase_ReturnsTrue() {
+    func testContains_AddMixedCaseWordFindDifferentCase_ReturnsTrue() {
         trie.add(string: "WoRd")
         XCTAssertTrue(trie.contains(string: "WORD"))
     }
     
-    func testContainsString_AddWithWrappingWhitespace_ReturnsTrue() {
+    func testContains_AddWithWrappingWhitespace_ReturnsTrue() {
         trie.add(string: " word ")
         XCTAssertTrue(trie.contains(string: "word"))
     }
 
-    func testContainsString_SearchWithWrappingWhitespace_ReturnsTrue() {
+    func testContains_SearchWithWrappingWhitespace_ReturnsTrue() {
         trie.add(string: "word")
         XCTAssertTrue(trie.contains(string: " word "))
     }
     
-    func testContainsString_AddStringContainingWhitespace_ReturnsTrue() {
+    func testContains_AddStringContainingWhitespace_ReturnsTrue() {
         let string = "a sentence is this"
         trie.add(string: string)
         XCTAssertTrue(trie.contains(string: string))
@@ -133,7 +139,6 @@ class TrieTests: XCTestCase {
         XCTAssertTrue(trie.contains(string: "fixing"))
         
         XCTAssertFalse(trie.contains(string: "fixed"))
-
     }
     
     func testStrings_ReturnsExpected() {
@@ -209,4 +214,3 @@ class TrieTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 }
-
