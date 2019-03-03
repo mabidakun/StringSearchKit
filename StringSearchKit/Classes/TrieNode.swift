@@ -43,10 +43,10 @@ class TrieNode: CustomStringConvertible {
     }
     
     func delete() {
-        parent?.delete(for: value)
+        parent?.delete(value)
     }
     
-    func delete(for character: Character) {
+    func delete(_ character: Character) {
         nodes[character] = nil
     }
     
