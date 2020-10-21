@@ -23,6 +23,8 @@
 import Foundation
 
 extension String {
+    
+    static let textFileExtension = "txt"
 
     var hasMoreCharacters: Bool {
         return self.count > 0
