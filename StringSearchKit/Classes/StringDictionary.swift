@@ -73,13 +73,15 @@ private extension StringDictionary {
         strings.addEntries(to: stringStore)
         
         if preservesCase {
-            updateWordMap(withSourceWords: strings)
+            wordMap = createWordMap(using: strings,
+                                    finder: stringStore.strings(withPrefix:))
         }
     }
-    
-    func updateWordMap(withSourceWords words: [String]) {
-        words.forEach{ (originalWord) in
-            let matchedWords = stringStore.strings(withPrefix: originalWord)
+
+    func createWordMap(using words: [String], finder find: (String) -> [String]) -> [String: String] {
+
+        return words.reduce(into: [String: String]()) { (wordMap, originalWord) in
+            let matchedWords = find(originalWord)
             let key = originalWord.lowercased()
             if matchedWords.contains(key){
                 wordMap[key] = originalWord
