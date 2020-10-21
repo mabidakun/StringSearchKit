@@ -24,8 +24,8 @@ import Foundation
 
 public class StringDictionary: StringDictionaryType {
  
-    fileprivate (set) var preservesCase = false
-    fileprivate let stringStore = Trie()
+    private (set) var preservesCase = false
+    private let stringStore = Trie()
     
     lazy var wordMap: [String : String] = {
         return [:]
@@ -66,7 +66,8 @@ public class StringDictionary: StringDictionaryType {
     }
 }
 
-fileprivate extension StringDictionary {
+// MARK: -
+private extension StringDictionary {
 
     func populate(withString strings: [String]) {
         strings.addEntries(to: stringStore)

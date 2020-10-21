@@ -206,7 +206,7 @@ class StringDictionaryTests: XCTestCase {
     }
 }
 
-fileprivate extension StringDictionaryTests {
+private extension StringDictionaryTests {
     
     func allWords() -> [String] {
         return ["activate", "alt", "as", "deactivate", "else", "end", "loop", "neg", "note", "opt", "par", "participant", "region"]

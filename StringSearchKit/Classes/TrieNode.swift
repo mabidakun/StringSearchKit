@@ -25,15 +25,10 @@ import Foundation
 class TrieNode: CustomStringConvertible {
     
     let value: Character
-    weak var parent: TrieNode?
-    var nodes: [Character: TrieNode] = [:]
     var isTerminating = false
-    
-    init(with value: Character, parent: TrieNode? = nil) {
-        self.value = value
-        self.parent = parent
-    }
-    
+    private (set) weak var parent: TrieNode?
+    private (set) var nodes: [Character: TrieNode] = [:]
+
     var description: String {
         return "\(value):\(nodes)"
     }
@@ -42,6 +37,13 @@ class TrieNode: CustomStringConvertible {
         return !isTerminating && nodes.isEmpty
     }
     
+    // MARK: -
+    
+    init(with value: Character, parent: TrieNode? = nil) {
+        self.value = value
+        self.parent = parent
+    }
+
     func delete() {
         parent?.nodes[value] = nil
     }

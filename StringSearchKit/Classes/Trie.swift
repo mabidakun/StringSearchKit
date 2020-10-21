@@ -26,6 +26,8 @@ class Trie {
 
     let node = TrieNode(with: "#");
 
+    // MARK: -
+    
     func add(string aString: String) {
         
         guard aString.hasMoreCharacters else {
@@ -89,7 +91,9 @@ class Trie {
     
 }
 
-fileprivate extension Trie {
+// MARK: -
+
+private extension Trie {
     
     func remove(string aString: String, node: TrieNode? = nil) {
         

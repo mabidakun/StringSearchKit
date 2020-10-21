@@ -55,8 +55,3 @@ private extension StringLoader {
         return try? String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
-
-// MARK: -
-private extension String {
-    static let textFileExtension = "txt"
-}
