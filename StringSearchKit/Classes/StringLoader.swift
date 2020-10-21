@@ -43,15 +43,20 @@ public class StringLoader {
     }
 }
 
-fileprivate extension StringLoader {
+private extension StringLoader {
     
     static func loadTextFile(named name: String) -> String? {
         
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-            let filepath = Bundle(for: self).path(forResource: name, ofType: "txt") else {
+              let filepath = Bundle(for: self).path(forResource: name, ofType: .textFileExtension) else {
             return nil
         }
 
         return try? String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
     }
+}
+
+// MARK: -
+private extension String {
+    static let textFileExtension = "txt"
 }
