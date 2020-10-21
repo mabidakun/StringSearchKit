@@ -29,7 +29,7 @@ class TrieNode: CustomStringConvertible {
     var nodes: [Character: TrieNode] = [:]
     var isTerminating = false
     
-    init(withValue value: Character, parent: TrieNode? = nil) {
+    init(with value: Character, parent: TrieNode? = nil) {
         self.value = value
         self.parent = parent
     }
@@ -48,7 +48,7 @@ class TrieNode: CustomStringConvertible {
     
     @discardableResult static func make(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
         
-        let childNode = TrieNode(withValue: character, parent: parent)
+        let childNode = TrieNode(with: character, parent: parent)
         
         parent?.nodes[character] = childNode
         return childNode

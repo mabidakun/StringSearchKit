@@ -26,91 +26,91 @@ import XCTest
 class TrieNodeTests: XCTestCase {
 
     func testInit_Value_ParentIsNil() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         
         XCTAssertNil(node.parent)
     }
 
     func testInit_Value_ValueIsAsGiven() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         
         XCTAssertEqual("a", node.value)
     }
 
     func testInit_UpperCaseValue_PreservesUpperCase() {
-        let node = TrieNode(withValue: "A")
+        let node = TrieNode(with: "A")
         
         XCTAssertEqual("A", node.value)
     }
 
     func testInit_UpperCaseValue_LowerCaseValueNotFound() {
-        let node = TrieNode(withValue: "A")
+        let node = TrieNode(with: "A")
         
         XCTAssertNotEqual("a", node.value)
     }
     
     func testInit_Value_NodeCountIs0() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         
         XCTAssertEqual(0, node.nodes.count)
     }
 
     func testInit_Value_IsTerminatingIsFalse() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         
         XCTAssertFalse(node.isTerminating)
     }
 
     func testInit_IsTerminatingTrue_IsTerminatingIsTrue() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         node.isTerminating = true
         
         XCTAssertTrue(node.isTerminating)
     }
 
     func testInit_CanDeleteIsTrue() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         
         XCTAssertTrue(node.canDelete)
     }
     
     func testInit_IsTerminatingTrue_CanDeleteIsFalse() {
-        let node = TrieNode(withValue: "a")
+        let node = TrieNode(with: "a")
         node.isTerminating = true
         
         XCTAssertFalse(node.canDelete)
     }
     
     func testTrieNode_AddChild_NodeCountIs1() {
-        let parent = TrieNode(withValue: "a")
+        let parent = TrieNode(with: "a")
         TrieNode.make(withCharacter: "b", parent: parent)
 
         XCTAssertEqual(1, parent.nodes.count)
     }
 
     func testTrieNode_AddChild_ParentCanDeleteIsFalse() {
-        let parent = TrieNode(withValue: "a")
+        let parent = TrieNode(with: "a")
         TrieNode.make(withCharacter: "b", parent: parent)
         
         XCTAssertFalse(parent.canDelete)
     }
     
     func testTrieNode_DeleteChild_NodeCountIs0() {
-        let parent = TrieNode(withValue: "a")
+        let parent = TrieNode(with: "a")
         TrieNode.make(withCharacter: "b", parent: parent).delete()
 
         XCTAssertEqual(0, parent.nodes.count)
     }
     
     func testTrieNode_DeleteChild_ParentCanDeleteIsTrue() {
-        let parent = TrieNode(withValue: "a")
+        let parent = TrieNode(with: "a")
         TrieNode.make(withCharacter: "b", parent: parent).delete()
         
         XCTAssertTrue(parent.canDelete)
     }
 
     func testTrieNode_ParentIsTerminating_DeleteChild_ParentCanDeleteIsFalse() {
-        let parent = TrieNode(withValue: "a")
+        let parent = TrieNode(with: "a")
         parent.isTerminating = true
         TrieNode.make(withCharacter: "b", parent: parent).delete()
         
@@ -119,7 +119,7 @@ class TrieNodeTests: XCTestCase {
 
     // Retain Cycle Test
     func testTrieNode_ReassignParent_ChildNodeDoesNotRetainParent() {
-        var parent: TrieNode? = TrieNode(withValue: "a")
+        var parent: TrieNode? = TrieNode(with: "a")
         let child = TrieNode.make(withCharacter: "b", parent: parent)
         parent = nil
       
