@@ -39,7 +39,7 @@ class TrieNode: CustomStringConvertible {
     }
     
     var canDelete: Bool {
-        return !isTerminating && nodes.count < 1
+        return !isTerminating && nodes.isEmpty
     }
     
     func delete() {
