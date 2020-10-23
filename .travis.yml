@@ -6,5 +6,5 @@ osx_image: xcode12
 language: objective-c
 
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -project StringSearchKit.xcodeproj -scheme StringSearchKit -sdk macosx10.13 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -project StringSearchKit.xcodeproj -scheme StringSearchKit -sdk macosx10.15 ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
