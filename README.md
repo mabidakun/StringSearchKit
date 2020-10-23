@@ -10,7 +10,7 @@ A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, st
 
 ## Requirements
    - macOS 10.11+
-   - iOS 8+
+   - iOS 9+
    - tvOS 9+
    
 ## Installation
