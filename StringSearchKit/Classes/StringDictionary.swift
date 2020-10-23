@@ -25,7 +25,7 @@ import Foundation
 public class StringDictionary: StringDictionaryType {
  
     private (set) var preservesCase = false
-    private let stringStore = Trie()
+    fileprivate let stringStore = Trie()
     
     lazy var wordMap: [String : String] = {
         return [:]
