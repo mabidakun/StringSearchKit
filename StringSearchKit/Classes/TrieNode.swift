@@ -25,32 +25,49 @@ import Foundation
 class TrieNode: CustomStringConvertible {
     
     let value: Character
-    weak var parent: TrieNode?
-    var nodes: [Character: TrieNode] = [:]
     var isTerminating = false
+    private (set) weak var parent: TrieNode?
+    private var nodes: [Character: TrieNode] = [:]
     
-    init(withValue value: Character, parent: TrieNode? = nil) {
-        self.value = value
-        self.parent = parent
+    var children: [Character: TrieNode] {
+        return nodes
     }
     
+    var hasChildren: Bool {
+        return !children.isEmpty
+    }
+
     var description: String {
         return "\(value):\(nodes)"
     }
     
     var canDelete: Bool {
-        return !isTerminating && nodes.count < 1
+        return !isTerminating && nodes.isEmpty
     }
     
+    // MARK: -
+    
+    init(with value: Character, parent: TrieNode? = nil) {
+        self.value = value
+        self.parent = parent
+    }
+
     func delete() {
         parent?.nodes[value] = nil
     }
     
-    @discardableResult static func make(withCharacter character: Character, parent: TrieNode?) -> TrieNode {
+    @discardableResult static func make(with character: Character, parent: TrieNode?) -> TrieNode {
         
-        let childNode = TrieNode(withValue: character, parent: parent)
-        
-        parent?.nodes[character] = childNode
+        let childNode = TrieNode(with: character, parent: parent)
+        parent?.insert(child: childNode, character: character)
         return childNode
+    }
+}
+
+// MARK: -
+
+private extension TrieNode {
+    func insert(child: TrieNode, character: Character) {
+        nodes[character] = child
     }
 }

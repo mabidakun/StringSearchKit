@@ -25,7 +25,7 @@ import XCTest
 
 class TrieTests: XCTestCase {
     
-    fileprivate var trie: Trie!
+    private var trie: Trie!
 
     override func setUp() {
         trie = Trie()

@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'StringSearchKit'
-  s.version          = '1.0.1'
+  s.version          = '2.0.0'
   s.summary          = 'A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, string searching, using a Trie.'
 
   s.description      = <<-DESC
@@ -13,8 +13,9 @@ Pod::Spec.new do |s|
   s.author           = { 'mabidakun' => 'github@mikeosoft.co.uk' }
   s.source           = { :git => 'https://github.com/mabidakun/StringSearchKit.git', :tag => s.version.to_s }
 
+  s.swift_version = '5.0'
   s.osx.deployment_target = '10.11'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
 
   s.source_files = 'StringSearchKit/Classes/**/*'

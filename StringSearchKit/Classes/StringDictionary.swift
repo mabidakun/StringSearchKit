@@ -24,7 +24,7 @@ import Foundation
 
 public class StringDictionary: StringDictionaryType {
  
-    fileprivate (set) var preservesCase = false
+    private (set) var preservesCase = false
     fileprivate let stringStore = Trie()
     
     lazy var wordMap: [String : String] = {
@@ -35,7 +35,7 @@ public class StringDictionary: StringDictionaryType {
     
     public init(withStrings strings: [String], preserveCase: Bool = false) {
         self.preservesCase = preserveCase
-        populate(withString: strings)
+        populate(with: strings)
     }
     
     public convenience init(withTextFileNamed filename: String, preserveCase: Bool = false) {
@@ -66,19 +66,22 @@ public class StringDictionary: StringDictionaryType {
     }
 }
 
-fileprivate extension StringDictionary {
+// MARK: -
+private extension StringDictionary {
 
-    func populate(withString strings: [String]) {
+    func populate(with strings: [String]) {
         strings.addEntries(to: stringStore)
         
         if preservesCase {
-            updateWordMap(withSourceWords: strings)
+            wordMap = createWordMap(using: strings,
+                                    finder: stringStore.strings(withPrefix:))
         }
     }
-    
-    func updateWordMap(withSourceWords words: [String]) {
-        words.forEach{ (originalWord) in
-            let matchedWords = stringStore.strings(withPrefix: originalWord)
+
+    func createWordMap(using words: [String], finder find: (String) -> [String]) -> [String: String] {
+
+        return words.reduce(into: [String: String]()) { (wordMap, originalWord) in
+            let matchedWords = find(originalWord)
             let key = originalWord.lowercased()
             if matchedWords.contains(key){
                 wordMap[key] = originalWord

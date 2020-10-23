@@ -23,20 +23,22 @@
 import Foundation
 
 extension String {
+    
+    static let textFileExtension = "txt"
 
     var hasMoreCharacters: Bool {
-        return self.count > 0
+        return !isEmpty
     }
     
     var firstCharacter: Character? {
-        return self.first
+        return first
     }
 
     func normalized() -> String {
-        return self.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        return lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func byChompingHead() -> String {
-        return String(self.dropFirst())
+        return String(dropFirst())
     }
 }
