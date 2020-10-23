@@ -27,7 +27,15 @@ class TrieNode: CustomStringConvertible {
     let value: Character
     var isTerminating = false
     private (set) weak var parent: TrieNode?
-    private (set) var nodes: [Character: TrieNode] = [:]
+    private var nodes: [Character: TrieNode] = [:]
+    
+    var children: [Character: TrieNode] {
+        return nodes
+    }
+    
+    var hasChildren: Bool {
+        return !children.isEmpty
+    }
 
     var description: String {
         return "\(value):\(nodes)"

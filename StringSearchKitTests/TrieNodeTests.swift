@@ -43,16 +43,16 @@ class TrieNodeTests: XCTestCase {
         XCTAssertEqual("A", node.value)
     }
 
-    func testInit_UpperCaseValue_LowerCaseValueNotFound() {
+    func testInit_UpperCaseValueIsEqualToLowerCaseValue_ReturnsFalse() {
         let node = TrieNode(with: "A")
         
         XCTAssertNotEqual("a", node.value)
     }
     
-    func testInit_Value_NodeCountIs0() {
+    func testInit_Value_HasChildrenIsFalse() {
         let node = TrieNode(with: "a")
         
-        XCTAssertEqual(0, node.nodes.count)
+        XCTAssertFalse(node.hasChildren)
     }
 
     func testInit_Value_IsTerminatingIsFalse() {
@@ -85,7 +85,7 @@ class TrieNodeTests: XCTestCase {
         let parent = TrieNode(with: "a")
         TrieNode.make(with: "b", parent: parent)
 
-        XCTAssertEqual(1, parent.nodes.count)
+        XCTAssertEqual(1, parent.children.count)
     }
 
     func testTrieNode_AddChild_ParentCanDeleteIsFalse() {
@@ -95,11 +95,11 @@ class TrieNodeTests: XCTestCase {
         XCTAssertFalse(parent.canDelete)
     }
     
-    func testTrieNode_DeleteChild_NodeCountIs0() {
+    func testTrieNode_DeleteChild_NodeHasChildrenIsFalse() {
         let parent = TrieNode(with: "a")
         TrieNode.make(with: "b", parent: parent).delete()
 
-        XCTAssertEqual(0, parent.nodes.count)
+        XCTAssertFalse(parent.hasChildren)
     }
     
     func testTrieNode_DeleteChild_ParentCanDeleteIsTrue() {
@@ -117,7 +117,8 @@ class TrieNodeTests: XCTestCase {
         XCTAssertFalse(parent.canDelete)
     }
 
-    // Retain Cycle Test
+    // MARK: - Retain Cycle Test
+    
     func testTrieNode_ReassignParent_ChildNodeDoesNotRetainParent() {
         var parent: TrieNode? = TrieNode(with: "a")
         let child = TrieNode.make(with: "b", parent: parent)

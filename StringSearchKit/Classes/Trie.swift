@@ -38,7 +38,7 @@ class Trie {
         
         var current = self.node
         string.forEach { (character) in
-            if let next = current.nodes[character] {
+            if let next = current.children[character] {
                 current = next
                 return
             }
@@ -67,7 +67,7 @@ class Trie {
         
         for character in word {
             
-            current = current?.nodes[character]
+            current = current?.children[character]
             if nil == current {
                 break
             }
@@ -98,7 +98,7 @@ private extension Trie {
     func remove(string aString: String, node: TrieNode? = nil) {
         
         guard let firstChar = aString.firstCharacter,
-            let current = node?.nodes[firstChar]
+            let current = node?.children[firstChar]
             else {
                 return
         }
@@ -135,7 +135,7 @@ private extension Trie {
         
         if !prefix.hasMoreCharacters {
             
-            for entry in node.nodes {
+            for entry in node.children {
                 strings(withPrefixWord: word,
                         prefix: prefix,
                         node: entry.value,
@@ -146,7 +146,7 @@ private extension Trie {
         }
         
         guard let character = prefix.firstCharacter,
-            let child = node.nodes[character] else {
+            let child = node.children[character] else {
                 return
         }
         
