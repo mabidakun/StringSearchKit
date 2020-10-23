@@ -25,8 +25,8 @@ import XCTest
 
 class StringDictionaryTests: XCTestCase {
 
-    let DictionaryTextFilename = "example-dictionary"
-    var wordDictionary: StringDictionary!
+    private let DictionaryTextFilename = "example-dictionary"
+    private var wordDictionary: StringDictionary!
 
     override func setUp() {
         wordDictionary = StringDictionary(withTextFilepath: StringSearchKitTestHelper.exampleFilepath)
@@ -132,6 +132,8 @@ class StringDictionaryTests: XCTestCase {
         
         XCTAssertTrue(wordDictionary.contains(string: "alt"))
         XCTAssertTrue(wordDictionary.contains(string: "alice"))
+        XCTAssertTrue(wordDictionary.contains(string: "bob"))
+        XCTAssertTrue(wordDictionary.contains(string: "charlie"))
     }
     
     // MARK:- Case preservation
@@ -209,6 +211,20 @@ class StringDictionaryTests: XCTestCase {
 private extension StringDictionaryTests {
     
     func allWords() -> [String] {
-        return ["activate", "alt", "as", "deactivate", "else", "end", "loop", "neg", "note", "opt", "par", "participant", "region"]
+        return [
+            "activate",
+            "alt",
+            "as",
+            "deactivate",
+            "else",
+            "end",
+            "loop",
+            "neg",
+            "note",
+            "opt",
+            "par",
+            "participant",
+            "region"
+        ]
     }
 }
