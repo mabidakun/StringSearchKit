@@ -59,8 +59,15 @@ class TrieNode: CustomStringConvertible {
     @discardableResult static func make(with character: Character, parent: TrieNode?) -> TrieNode {
         
         let childNode = TrieNode(with: character, parent: parent)
-        
-        parent?.nodes[character] = childNode
+        parent?.insert(child: childNode, character: character)
         return childNode
+    }
+}
+
+// MARK: -
+
+private extension TrieNode {
+    func insert(child: TrieNode, character: Character) {
+        nodes[character] = child
     }
 }

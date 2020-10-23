@@ -43,6 +43,8 @@ public class StringLoader {
     }
 }
 
+// MARK: -
+
 private extension StringLoader {
     
     static func loadTextFile(named name: String) -> String? {

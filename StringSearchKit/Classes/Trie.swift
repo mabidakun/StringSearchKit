@@ -24,7 +24,7 @@ import Foundation
 
 class Trie {
 
-    let node = TrieNode(with: "#");
+    private let head = TrieNode(with: "#")
 
     // MARK: -
     
@@ -36,7 +36,7 @@ class Trie {
         
         let string = aString.normalized()
         
-        var current = self.node
+        var current = head
         string.forEach { (character) in
             if let next = current.children[character] {
                 current = next
@@ -49,21 +49,21 @@ class Trie {
         current.isTerminating = true
     }
     
-    func add(strings theStrings: [String]) {
-        theStrings.forEach { (string) in
-            self.add(string: string)
+    func add(strings: [String]) {
+        strings.forEach { (string) in
+            add(string: string)
         }
     }
 
-    func remove(string theString: String) {
-        remove(string: theString.normalized(), node: node)
+    func remove(string: String) {
+        remove(string: string.normalized(), node: head)
     }
 
-    func contains(string aString: String) -> Bool {
+    func contains(string: String) -> Bool {
         
-        var current: TrieNode? = self.node
+        var current: TrieNode? = head
 
-        let word = aString.normalized()
+        let word = string.normalized()
         
         for character in word {
             
@@ -83,27 +83,29 @@ class Trie {
         let word = prefix.normalized()
         strings(withPrefixWord: word,
                 prefix: word,
-                node: node,
+                node: head,
                 accumulatedStrings: values)
         
-        return values.map { $0 as! String }.sorted()
+        return
+            values
+            .compactMap { $0 as? String }
+            .sorted()
     }
-    
 }
 
 // MARK: -
 
 private extension Trie {
     
-    func remove(string aString: String, node: TrieNode? = nil) {
+    func remove(string: String, node: TrieNode? = nil) {
         
-        guard let firstChar = aString.firstCharacter,
+        guard let firstChar = string.firstCharacter,
             let current = node?.children[firstChar]
             else {
                 return
         }
         
-        let remainingString = aString.byChompingHead()
+        let remainingString = string.byChompingHead()
         
         if !remainingString.hasMoreCharacters, current.isTerminating {
             current.isTerminating = false
@@ -123,9 +125,7 @@ private extension Trie {
                  accumulatedCharacters: String = "",
                  accumulatedStrings: NSMutableSet) {
         
-        guard let node = node else {
-            return
-        }
+        guard let node = node else { return }
         
         let nodeValue = nil == node.parent ? "" : String(node.value)
         let stringSoFar = "\(accumulatedCharacters)\(nodeValue)"

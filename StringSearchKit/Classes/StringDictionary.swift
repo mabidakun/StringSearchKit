@@ -35,7 +35,7 @@ public class StringDictionary: StringDictionaryType {
     
     public init(withStrings strings: [String], preserveCase: Bool = false) {
         self.preservesCase = preserveCase
-        populate(withString: strings)
+        populate(with: strings)
     }
     
     public convenience init(withTextFileNamed filename: String, preserveCase: Bool = false) {
@@ -69,7 +69,7 @@ public class StringDictionary: StringDictionaryType {
 // MARK: -
 private extension StringDictionary {
 
-    func populate(withString strings: [String]) {
+    func populate(with strings: [String]) {
         strings.addEntries(to: stringStore)
         
         if preservesCase {
