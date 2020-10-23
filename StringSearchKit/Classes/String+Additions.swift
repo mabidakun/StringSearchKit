@@ -27,7 +27,7 @@ extension String {
     static let textFileExtension = "txt"
 
     var hasMoreCharacters: Bool {
-        return self.count > 0
+        return !self.isEmpty
     }
     
     var firstCharacter: Character? {
