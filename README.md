@@ -6,10 +6,11 @@ A simple library for macOS, iOS and tvOS that enables fast, in-memory, prefix-ba
 [![License](https://img.shields.io/github/license/mabidakun/StringSearchKit.svg?style=flat)](LICENSE)
 
 ## Requirements
-   - macOS 12+
-   - iOS 15+
-   - tvOS 15+
-   - Swift 5.9+
+
+- macOS 12+
+- iOS 15+
+- tvOS 15+
+- Swift 5.9+
 
 ## Installation
 
@@ -37,7 +38,7 @@ pod "StringSearchKit"
 
 ### Why is this framework useful?
 
-Because it makes it really easy to implement **Auto-Complete** functionality in an application - as I did in my macOS™ app - [Sequence Diagram](https://itunes.apple.com/gb/app/sequence-diagram/id1195426709?mt=12) 
+Because it makes it really easy to implement **Auto-Complete** functionality in an application - as I did in my macOS™ app - [Sequence Diagram](https://itunes.apple.com/gb/app/sequence-diagram/id1195426709?mt=12)
 
 ### How does it work?
 
@@ -53,12 +54,12 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
 
 ### How do I get started?
 
-#### Usage:
+#### Usage
 
-   - `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
-   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, bundle: Bundle = .main, preserveCase: Bool = false)`
-   - `StringDictionary(withTextFilepath: <The path to a text file>, preserveCase: Bool = false)`
-   
+- `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
+- `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, bundle: Bundle = .main, preserveCase: Bool = false)`
+- `StringDictionary(withTextFilepath: <The path to a text file>, preserveCase: Bool = false)`
+
 Using one of the initialisers above, create an instance of `StringDictionary`.
 
 When initialising from a file, it should simply contain one string per-line.
@@ -66,7 +67,8 @@ When initialising from a file, it should simply contain one string per-line.
 Strings are not limited to being single words - but are in the examples, for simplicity.
 
 Example file contents :-
-```
+
+```text
 act
 apologise
 apology
@@ -76,7 +78,7 @@ apple
 
 Once instantiated, use the `StringDictionary` to quickly find strings (case-insensitively) with a given prefix.
 
-```
+```swift
 let stringDictionary = StringDictionary(withStrings: ["act", "app", "apple", "apologise", "apology"])
 let searchResults = stringDictionary.strings(withPrefix: "app")
 
@@ -95,10 +97,9 @@ let allStrings = stringDictionary.strings()
 
 If you set `preserveCase: true` in any of the `init` methods (default is `false` for backwards compatibility), the results will be returned in the same case that the original words were in when added.
 
-
 For example:
 
-```
+```swift
 let stringDictionary = StringDictionary(withStrings: ["Act", "App", "Apple", "Apologise", "Apology"], preserveCase: true)
 let searchResults = stringDictionary.strings(withPrefix: "app")
 
@@ -112,7 +113,6 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 - Text files may use `\n` or `\r\n` line endings. Empty and whitespace-only lines are skipped.
 - Strings that differ only in case are stored once. The one added last decides the case of the result when `preserveCase` is `true`.
 
-
 ## Author
 
 **Mike O. Abidakun** `github@mikeosoft.co.uk`
@@ -120,4 +120,3 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 ## License
 
 StringSearchKit is available under the MIT license. See the LICENSE file for more info.
-
