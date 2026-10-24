@@ -66,6 +66,18 @@ class String_AdditionsTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testNormalized_DottedCapitalI_ReturnsPlainI() {
+        let expected = "istanbul"
+        let actual = "İSTANBUL".normalized()
+        XCTAssertEqual(Array(expected.unicodeScalars), Array(actual.unicodeScalars))
+    }
+
+    func testNormalized_SharpS_ReturnsDoubleS() {
+        let expected = "strasse"
+        let actual = "Straße".normalized()
+        XCTAssertEqual(expected, actual)
+    }
+
     // MARK: - normalizedPrefix tests
 
     func testNormalizedPrefix_StringWrappedInWhitespace_KeepsTrailingWhitespace() {

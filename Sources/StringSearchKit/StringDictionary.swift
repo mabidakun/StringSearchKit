@@ -111,10 +111,7 @@ public class StringDictionary: StringDictionaryType {
     /// - Parameter string: The string to insert.
     public func add(string: String) {
         stringStore.add(string: string)
-
-        if preservesCase {
-            recordOriginalCase(of: string)
-        }
+        recordResultForm(of: string)
     }
 
     /// Returns a Boolean value indicating whether the dictionary contains the
@@ -140,25 +137,23 @@ public class StringDictionary: StringDictionaryType {
     ///   string (the default) to return all strings in the dictionary.
     /// - Returns: An array of matching strings, which may be empty.
     public func strings(withPrefix prefix: String = "") -> [String] {
-        let results = stringStore.strings(withPrefix: prefix)
-        return preservesCase ? originalCaseWords(for: results) : results
+        return stringStore.strings(withPrefix: prefix).map { wordMap[$0] ?? $0 }
     }
 }
 
 // MARK: -
 private extension StringDictionary {
 
-    func recordOriginalCase(of string: String) {
+    // Results are keyed by the case-folded string; map back to the form to return when it differs.
+    func recordResultForm(of string: String) {
         let key = string.normalized()
 
         guard key.hasMoreCharacters else {
             return
         }
 
-        wordMap[key] = string.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    func originalCaseWords(for words: [String]) -> [String] {
-        return words.map { wordMap[$0] ?? $0 }
+        let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        let resultForm = preservesCase ? trimmed : trimmed.lowercased()
+        wordMap[key] = resultForm == key ? nil : resultForm
     }
 }

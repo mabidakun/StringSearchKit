@@ -35,11 +35,17 @@ extension String {
     }
 
     func normalized() -> String {
-        return lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmingCharacters(in: .whitespacesAndNewlines).caseFolded()
     }
 
     func normalizedPrefix() -> String {
-        return String(lowercased().drop(while: \.isWhitespace))
+        return String(drop(while: \.isWhitespace)).caseFolded()
+    }
+
+    // Case folding maps "İ" to "i" plus U+0307; drop the dot so "İstanbul" matches "ist".
+    private func caseFolded() -> String {
+        return folding(options: .caseInsensitive, locale: nil)
+            .replacingOccurrences(of: "i\u{307}", with: "i")
     }
 
     func byChompingHead() -> String {

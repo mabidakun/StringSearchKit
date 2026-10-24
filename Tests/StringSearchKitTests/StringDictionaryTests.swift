@@ -228,9 +228,38 @@ class StringDictionaryTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testStringsWithPrefix_PreservesCase_DottedCapitalI_MatchesPlainI() {
+        let expected = ["İstanbul"]
+        let wordDictionary = StringDictionary(withStrings: ["İstanbul"], preserveCase: true)
+        let actual = wordDictionary.strings(withPrefix: "ist")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_SharpS_MatchesDoubleSAndReturnsLowercasedOriginal() {
+        let expected = ["straße"]
+        let wordDictionary = StringDictionary(withStrings: ["Straße"])
+        let actual = wordDictionary.strings(withPrefix: "STRASS")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testContains_SharpS_DoubleS_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withStrings: ["Straße"])
+        XCTAssertTrue(wordDictionary.contains(string: "STRASSE"))
+    }
+
     func testInitWithStrings_PreservesCase_CaseVariants_ReturnsLastAdded() {
         let expected = ["APPLE"]
         let wordDictionary = StringDictionary(withStrings: ["Apple", "apple", "APPLE"], preserveCase: true)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithStrings_PreservesCase_LowercaseVariantAddedLast_ReturnsLowercase() {
+        let expected = ["apple"]
+        let wordDictionary = StringDictionary(withStrings: ["APPLE", "apple"], preserveCase: true)
         let actual = wordDictionary.strings()
 
         XCTAssertEqual(expected, actual)
