@@ -194,6 +194,104 @@ class StringDictionaryTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testAddString_PreservesCase_ReturnsOriginalCase() {
+        let expected = ["Act", "Apple"]
+        let wordDictionary = StringDictionary(withStrings: ["Act"], preserveCase: true)
+        wordDictionary.add(string: "Apple")
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testAddStrings_PreservesCase_ReturnsOriginalCase() {
+        let expected = ["App", "Apple"]
+        let wordDictionary = StringDictionary(withStrings: [], preserveCase: true)
+        wordDictionary.add(strings: ["Apple", "App"])
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithStrings_PreservesCase_WhitespaceWrappedString_ReturnsTrimmedOriginalCase() {
+        let expected = ["Apple"]
+        let wordDictionary = StringDictionary(withStrings: [" Apple\n"], preserveCase: true)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_TrailingSpace_MatchesOnlyStringsWithThatSpace() {
+        let expected = ["new york"]
+        let wordDictionary = StringDictionary(withStrings: ["new york", "newark"])
+        let actual = wordDictionary.strings(withPrefix: "new ")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_PreservesCase_DottedCapitalI_MatchesPlainI() {
+        let expected = ["İstanbul"]
+        let wordDictionary = StringDictionary(withStrings: ["İstanbul"], preserveCase: true)
+        let actual = wordDictionary.strings(withPrefix: "ist")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_SharpS_MatchesDoubleSAndReturnsLowercasedOriginal() {
+        let expected = ["straße"]
+        let wordDictionary = StringDictionary(withStrings: ["Straße"])
+        let actual = wordDictionary.strings(withPrefix: "STRASS")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testContains_SharpS_DoubleS_ReturnsTrue() {
+        let wordDictionary = StringDictionary(withStrings: ["Straße"])
+        XCTAssertTrue(wordDictionary.contains(string: "STRASSE"))
+    }
+
+    func testStringsWithPrefix_LeadingZeroWidthSpace_MatchesLikeContains() {
+        let expected = ["apple"]
+        let wordDictionary = StringDictionary(withStrings: ["\u{200B}apple"])
+        let actual = wordDictionary.strings(withPrefix: "\u{200B}app")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_CombiningMarkAfterLeadingSpace_MatchesLikeContains() {
+        let expected = ["\u{301}new"]
+        let wordDictionary = StringDictionary(withStrings: [" \u{301}new"])
+        let actual = wordDictionary.strings(withPrefix: " \u{301}new")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithStrings_PreservesCase_CaseVariants_ReturnsLastAdded() {
+        let expected = ["APPLE"]
+        let wordDictionary = StringDictionary(withStrings: ["Apple", "apple", "APPLE"], preserveCase: true)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithStrings_PreservesCase_LowercaseVariantAddedLast_ReturnsLowercase() {
+        let expected = ["apple"]
+        let wordDictionary = StringDictionary(withStrings: ["APPLE", "apple"], preserveCase: true)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithTextFilePath_WhitespaceOnlyLine_IsNotStored() throws {
+        let expected = ["act", "app"]
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).txt")
+        try "act\n   \napp\n".write(to: fileURL, atomically: true, encoding: .utf8)
+        defer { try? FileManager.default.removeItem(at: fileURL) }
+        let wordDictionary = StringDictionary(withTextFilepath: fileURL.path)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testContains_PreservesCase_Activate_ReturnsTrue() {
         let wordDictionary = StringDictionary(withStrings: ["Activate"], preserveCase: true)
 

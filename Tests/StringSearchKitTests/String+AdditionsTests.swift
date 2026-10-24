@@ -34,24 +34,6 @@ class String_AdditionsTests: XCTestCase {
         XCTAssertFalse("".hasMoreCharacters)
     }
     
-    // MARK: - firstCharacter tests
-
-    func testFirstCharacter_EmptyString_ReturnsNil() {
-        XCTAssertNil("".firstCharacter)
-    }
-    
-    func testFirstCharacter_A_ReturnsA() {
-        let expected: Character = "A"
-        let actual = "A".firstCharacter
-        XCTAssertEqual(expected, actual)
-    }
-
-    func testFirstCharacter_CBA_ReturnsC() {
-        let expected: Character = "C"
-        let actual = "CBA".firstCharacter
-        XCTAssertEqual(expected, actual)
-    }
-    
     // MARK: - normalized tests
     
     func testNormalized_VALUE_ReturnsLowerCasedValue() {
@@ -66,23 +48,29 @@ class String_AdditionsTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
-    // MARK:- byChompingHead tests
-    
-    func testByChompingHead_EmptyString_ReturnsEmptyString() {
-        let expected = ""
-        let actual = "".byChompingHead()
+    func testNormalized_DottedCapitalI_ReturnsPlainI() {
+        let expected = "istanbul"
+        let actual = "İSTANBUL".normalized()
+        XCTAssertEqual(Array(expected.unicodeScalars), Array(actual.unicodeScalars))
+    }
+
+    func testNormalized_SharpS_ReturnsDoubleS() {
+        let expected = "strasse"
+        let actual = "Straße".normalized()
         XCTAssertEqual(expected, actual)
     }
 
-    func testByChompingHead_A_ReturnsEmptyString() {
-        let expected = ""
-        let actual = "A".byChompingHead()
+    // MARK: - normalizedPrefix tests
+
+    func testNormalizedPrefix_LeadingZeroWidthSpace_RemovesItLikeNormalized() {
+        let expected = "\u{200B}APP".normalized()
+        let actual = "\u{200B}APP".normalizedPrefix()
         XCTAssertEqual(expected, actual)
     }
 
-    func testByChompingHead_ABC_ReturnsBC() {
-        let expected = "Bc"
-        let actual = "ABc".byChompingHead()
+    func testNormalizedPrefix_StringWrappedInWhitespace_KeepsTrailingWhitespace() {
+        let expected = "new "
+        let actual = "  NEW ".normalizedPrefix()
         XCTAssertEqual(expected, actual)
     }
 }

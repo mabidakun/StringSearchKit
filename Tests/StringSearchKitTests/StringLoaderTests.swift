@@ -62,6 +62,27 @@ class StringLoaderTests: XCTestCase {
         XCTAssertEqual(expected, actual.count)
     }
 
+    func testLoadDictionary_CRLFAndBlankLines_ReturnsOnlyNonEmptyLines() throws {
+        let expected = ["apple", " banana ", "cherry"]
+        let actual = try load(fileContents: "apple\r\n banana \r\n\r\n\ncherry\r\n")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testLoadDictionary_WhitespaceOnlyLines_AreSkipped() throws {
+        let expected = ["apple", "cherry"]
+        let actual = try load(fileContents: "apple\n  \n\t\r\ncherry")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testLoadDictionary_PaddedFirstAndLastLines_KeepTheirWhitespace() throws {
+        let expected = ["  apple", "cherry  "]
+        let actual = try load(fileContents: "  apple\ncherry  ")
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testLoadDictionary_ExistingFilename_ReturnsPopulatedArray() {
         
         let expected = 13
@@ -82,5 +103,14 @@ class StringLoaderTests: XCTestCase {
         let actual = StringLoader.load(withFilepath: StringSearchKitTestHelper.exampleFilepath)
         
         XCTAssertEqual(expected, actual.last)
+    }
+
+    // MARK: - helpers
+
+    private func load(fileContents: String) throws -> [String] {
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).txt")
+        try fileContents.write(to: fileURL, atomically: true, encoding: .utf8)
+        defer { try? FileManager.default.removeItem(at: fileURL) }
+        return StringLoader.load(withFilepath: fileURL.path)
     }
 }

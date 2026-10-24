@@ -38,6 +38,19 @@ class TrieTests: XCTestCase {
         XCTAssertFalse(trie.contains(string: ""))
     }
 
+    func testAddString_WhitespaceOnly_IsNotStored() {
+        let expected: [String] = []
+        trie.add(string: " \t\n")
+        let actual = trie.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testAddString_WhitespaceOnly_ContainsEmptyStringIsFalse() {
+        trie.add(string: " \t\n")
+        XCTAssertFalse(trie.contains(string: ""))
+    }
+
     func testAddString_Word_ContainsWordIsTrue() {
         let word = "word"
         trie.add(string: word)
@@ -139,7 +152,7 @@ class TrieTests: XCTestCase {
     func testStrings_ReturnsExpected() {
         
         let expected = ["fix", "fixed", "fixer"]
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings()
         
         XCTAssertEqual(expected, actual)
@@ -148,7 +161,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_A_ReturnsExpected() {
         
         let input = ["a", "abc", "bc", "bob"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         
         let actual = trie.strings(withPrefix: "a")
         
@@ -158,7 +171,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_Bob_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bob")
         
         XCTAssertEqual(["bob", "bobbing"], actual)
@@ -167,7 +180,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_MixedCase_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "BoB")
         
         XCTAssertEqual(["bob", "bobbing"], actual)
@@ -176,7 +189,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_LongerPrefix_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bobb")
         
         XCTAssertEqual(["bobbing"], actual)
@@ -185,7 +198,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_LongerPrefixMultipleWords_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing", "bobbled"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bobb")
         
         XCTAssertEqual(["bobbing", "bobbled"], actual)
@@ -194,7 +207,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_EmptyString_ReturnsExpected() {
         
         let expected = ["a", "bob", "abc", "bobbing", "bobbled"].sorted()
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings(withPrefix: "")
         
         XCTAssertEqual(expected, actual)
@@ -203,10 +216,66 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_NoString_ReturnsExpected() {
         
         let expected = ["a", "bob", "abc", "bobbing", "bobbled"].sorted()
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings()
-        
+
         XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_DecomposedPrefixForPrecomposedString_ReturnsStoredScalars() {
+        let expected = Array("caf\u{E9}".unicodeScalars)
+        trie.add(string: "caf\u{E9}")
+        let actual = trie.strings(withPrefix: "CAFE\u{301}").first.map { Array($0.unicodeScalars) }
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    // MARK: - long strings
+
+    // Background threads have a small stack, so recursion per character overflows it.
+    func testStringsWithPrefix_LongStringOnBackgroundThread_ReturnsString() {
+        let longString = String(repeating: "a", count: 20_000)
+        var actual: [String] = []
+        let finished = expectation(description: "search finished")
+        DispatchQueue.global().async {
+            let trie = Trie()
+            trie.add(string: longString)
+            actual = trie.strings(withPrefix: "a")
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 30)
+
+        XCTAssertEqual([longString], actual)
+    }
+
+    func testRemoveString_LongStringOnBackgroundThread_LeavesTrieEmpty() {
+        let expected: [String] = []
+        var actual: [String] = ["not run"]
+        let finished = expectation(description: "remove finished")
+        DispatchQueue.global().async {
+            let trie = Trie()
+            let longString = String(repeating: "a", count: 20_000)
+            trie.add(string: longString)
+            trie.remove(string: longString)
+            actual = trie.strings()
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 30)
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testDeinit_LongStringOnBackgroundThread_FreesWithoutCrashing() {
+        let finished = expectation(description: "trie freed")
+        DispatchQueue.global().async {
+            autoreleasepool {
+                let trie = Trie()
+                trie.add(string: String(repeating: "a", count: 20_000))
+            }
+            finished.fulfill()
+        }
+
+        wait(for: [finished], timeout: 30)
     }
 }
 

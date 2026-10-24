@@ -30,15 +30,19 @@ extension String {
         return !isEmpty
     }
 
-    var firstCharacter: Character? {
-        return first
-    }
-
     func normalized() -> String {
-        return lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmingCharacters(in: .whitespacesAndNewlines).caseFolded()
     }
 
-    func byChompingHead() -> String {
-        return String(dropFirst())
+    // Trims leading whitespace with the same character set as normalized(), so prefixes and stored strings agree.
+    func normalizedPrefix() -> String {
+        let trimmed = unicodeScalars.drop(while: CharacterSet.whitespacesAndNewlines.contains)
+        return String(String.UnicodeScalarView(trimmed)).caseFolded()
+    }
+
+    // Case folding maps "İ" to "i" plus U+0307; drop the dot so "İstanbul" matches "ist".
+    private func caseFolded() -> String {
+        return folding(options: .caseInsensitive, locale: nil)
+            .replacingOccurrences(of: "i\u{307}", with: "i")
     }
 }

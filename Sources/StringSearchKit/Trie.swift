@@ -30,11 +30,11 @@ class Trie {
 
     func add(string aString: String) {
 
-        guard aString.hasMoreCharacters else {
+        let string = aString.normalized()
+
+        guard string.hasMoreCharacters else {
             return
         }
-
-        let string = aString.normalized()
 
         var current = head
         string.forEach { (character) in
@@ -56,7 +56,27 @@ class Trie {
     }
 
     func remove(string: String) {
-        remove(string: string.normalized(), node: head)
+
+        var path: [TrieNode] = []
+        var current = head
+
+        for character in string.normalized() {
+            guard let next = current.children[character] else {
+                return
+            }
+            current = next
+            path.append(next)
+        }
+
+        current.isTerminating = false
+
+        // Prune from the end of the string back towards the root, stopping at the first node still in use.
+        for node in path.reversed() {
+            guard node.canDelete else {
+                return
+            }
+            node.delete()
+        }
     }
 
     func contains(string: String) -> Bool {
@@ -78,18 +98,13 @@ class Trie {
 
     func strings(withPrefix prefix: String = "") -> [String] {
 
-        let values: NSMutableSet = NSMutableSet()
+        let word = prefix.normalizedPrefix()
 
-        let word = prefix.normalized()
-        strings(withPrefixWord: word,
-                prefix: word,
-                node: head,
-                accumulatedStrings: values)
+        guard let (prefixNode, storedPrefix) = node(reaching: word) else {
+            return []
+        }
 
-        return
-            values
-            .compactMap { $0 as? String }
-            .sorted()
+        return strings(below: prefixNode, prefix: storedPrefix).sorted()
     }
 }
 
@@ -97,64 +112,47 @@ class Trie {
 
 private extension Trie {
 
-    func remove(string: String, node: TrieNode? = nil) {
+    // Returns the node at the end of `word` and the stored text of that path, which may differ in bytes from `word` (for example a precomposed "é").
+    func node(reaching word: String) -> (node: TrieNode, storedPrefix: String)? {
 
-        guard let firstChar = string.firstCharacter,
-            let current = node?.children[firstChar]
-            else {
-                return
+        var current = head
+        var storedPrefix: [Character] = []
+
+        for character in word {
+            guard let next = current.children[character] else {
+                return nil
+            }
+            current = next
+            storedPrefix.append(next.value)
         }
 
-        let remainingString = string.byChompingHead()
-
-        if !remainingString.hasMoreCharacters, current.isTerminating {
-            current.isTerminating = false
-        }
-        else {
-            remove(string: remainingString, node: current)
-        }
-
-        if current.canDelete {
-            current.delete()
-        }
+        return (current, String(storedPrefix))
     }
 
-    func strings(withPrefixWord word: String,
-                 prefix: String,
-                 node: TrieNode? = nil,
-                 accumulatedCharacters: String = "",
-                 accumulatedStrings: NSMutableSet) {
+    // Depth-first walk with an explicit stack, so long strings cannot overflow the call stack.
+    func strings(below start: TrieNode, prefix: String) -> [String] {
 
-        guard let node = node else { return }
+        var results: [String] = []
+        var path: [Character] = []
+        var pending: [(node: TrieNode, depth: Int)] = [(start, 0)]
 
-        let nodeValue = nil == node.parent ? "" : String(node.value)
-        let stringSoFar = "\(accumulatedCharacters)\(nodeValue)"
-        if node.isTerminating && stringSoFar.hasPrefix(word) {
-            accumulatedStrings.add(stringSoFar)
-        }
+        while let (node, depth) = pending.popLast() {
 
-        if !prefix.hasMoreCharacters {
-
-            for entry in node.children {
-                strings(withPrefixWord: word,
-                        prefix: prefix,
-                        node: entry.value,
-                        accumulatedCharacters: stringSoFar,
-                        accumulatedStrings: accumulatedStrings)
+            path.removeLast(path.count - max(depth - 1, 0))
+            if depth > 0 {
+                path.append(node.value)
             }
-            return
+
+            if node.isTerminating {
+                results.append(prefix + String(path))
+            }
+
+            for child in node.children.values {
+                pending.append((child, depth + 1))
+            }
         }
 
-        guard let character = prefix.firstCharacter,
-            let child = node.children[character] else {
-                return
-        }
-
-        strings(withPrefixWord: word,
-                prefix: prefix.byChompingHead(),
-                node: child,
-                accumulatedCharacters: stringSoFar,
-                accumulatedStrings: accumulatedStrings)
+        return results
     }
 }
 

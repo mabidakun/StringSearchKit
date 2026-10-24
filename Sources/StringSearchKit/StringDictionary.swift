@@ -36,6 +36,9 @@ import Foundation
 /// By default, lookups are case-insensitive. When `preserveCase` is `true`,
 /// results returned by ``strings(withPrefix:)`` retain their original casing.
 ///
+/// Strings that differ only in case are stored once. With `preserveCase`,
+/// results use the casing of the one added last.
+///
 /// ## Example
 ///
 /// ```swift
@@ -47,9 +50,7 @@ public class StringDictionary: StringDictionaryType {
     private(set) var preservesCase = false
     fileprivate let stringStore = Trie()
 
-    lazy var wordMap: [String: String] = {
-        return [:]
-    }()
+    private var wordMap: [String: String] = [:]
 
     // MARK: - Initialisers
 
@@ -61,7 +62,7 @@ public class StringDictionary: StringDictionaryType {
     ///     retain their original casing. Defaults to `false`.
     public init(withStrings strings: [String], preserveCase: Bool = false) {
         self.preservesCase = preserveCase
-        populate(with: strings)
+        add(strings: strings)
     }
 
     /// Creates a string dictionary by loading strings from a text file resource
@@ -102,7 +103,7 @@ public class StringDictionary: StringDictionaryType {
     ///
     /// - Parameter strings: The strings to insert.
     public func add(strings: [String]) {
-        stringStore.add(strings: strings)
+        strings.forEach { add(string: $0) }
     }
 
     /// Adds a single string to the dictionary.
@@ -110,6 +111,7 @@ public class StringDictionary: StringDictionaryType {
     /// - Parameter string: The string to insert.
     public func add(string: String) {
         stringStore.add(string: string)
+        recordResultForm(of: string)
     }
 
     /// Returns a Boolean value indicating whether the dictionary contains the
@@ -130,44 +132,28 @@ public class StringDictionary: StringDictionaryType {
     /// returned strings retain their original casing; otherwise they are
     /// lowercased.
     ///
-    /// - Parameter prefix: The prefix to match against. Pass an empty string
-    ///   (the default) to return all strings in the dictionary.
+    /// - Parameter prefix: The prefix to match against. Leading whitespace is
+    ///   ignored; trailing whitespace is part of the prefix. Pass an empty
+    ///   string (the default) to return all strings in the dictionary.
     /// - Returns: An array of matching strings, which may be empty.
     public func strings(withPrefix prefix: String = "") -> [String] {
-        let results = stringStore.strings(withPrefix: prefix)
-        return preservesCase ? originalCaseWords(for: results) : results
+        return stringStore.strings(withPrefix: prefix).map { wordMap[$0] ?? $0 }
     }
 }
 
 // MARK: -
 private extension StringDictionary {
 
-    func populate(with strings: [String]) {
-        strings.addEntries(to: stringStore)
+    // Results are keyed by the case-folded string; map back to the form to return when it differs.
+    func recordResultForm(of string: String) {
+        let key = string.normalized()
 
-        if preservesCase {
-            wordMap = createWordMap(using: strings,
-                                    finder: stringStore.strings(withPrefix:))
+        guard key.hasMoreCharacters else {
+            return
         }
-    }
 
-    func createWordMap(using words: [String], finder find: (String) -> [String]) -> [String: String] {
-
-        return words.reduce(into: [String: String]()) { (wordMap, originalWord) in
-            let matchedWords = find(originalWord)
-            let key = originalWord.lowercased()
-            if matchedWords.contains(key) {
-                wordMap[key] = originalWord
-            }
-        }
-    }
-
-    func originalCaseWords(for words: [String]) -> [String] {
-        return words.map { [weak self] (word) -> String in
-            if let originalWord = self?.wordMap[word] {
-                return originalWord
-            }
-            return word
-        }
+        let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        let resultForm = preservesCase ? trimmed : trimmed.lowercased()
+        wordMap[key] = resultForm == key ? nil : resultForm
     }
 }

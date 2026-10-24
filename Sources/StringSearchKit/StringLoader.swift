@@ -32,25 +32,29 @@ public class StringLoader {
 
     /// Loads strings from a text file at the given file path.
     ///
-    /// The file is expected to contain one string per line. Leading and
-    /// trailing whitespace is trimmed from the file contents before splitting.
+    /// The file is expected to contain one string per line. Any line ending
+    /// (`\n`, `\r\n` or `\r`) separates lines, and empty or whitespace-only
+    /// lines are skipped. Whitespace within a line is kept.
     ///
     /// - Parameter path: The absolute path to the text file.
-    /// - Returns: An array of strings, one per line, or an empty array if the
-    ///   file cannot be read.
+    /// - Returns: An array of strings, one per non-blank line, or an empty
+    ///   array if the file cannot be read.
     public static func load(withFilepath path: String) -> [String] {
 
-        guard let contents = try? String(contentsOfFile: path).trimmingCharacters(in: .whitespacesAndNewlines) else {
+        guard let contents = try? String(contentsOfFile: path) else {
             return []
         }
 
-        return contents.components(separatedBy: .newlines)
+        return contents
+            .split(whereSeparator: \.isNewline)
+            .map(String.init)
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
 
     /// Loads strings from a named text file resource in a bundle.
     ///
     /// The file is expected to have a `.txt` extension and contain one
-    /// string per line.
+    /// string per line. Lines are split as in ``load(withFilepath:)``.
     ///
     /// - Parameters:
     ///   - name: The name of the text file resource, without the `.txt`
@@ -58,29 +62,15 @@ public class StringLoader {
     ///   - bundle: The bundle that contains the resource. Defaults to the
     ///     main bundle. Pass `Bundle.module` for a resource in a Swift
     ///     package target.
-    /// - Returns: An array of strings, one per line, or an empty array if the
-    ///   resource cannot be found or read.
+    /// - Returns: An array of strings, one per non-blank line, or an empty
+    ///   array if the resource cannot be found or read.
     public static func load(fromTextFileNamed name: String, in bundle: Bundle = .main) -> [String] {
-
-        guard let contents = loadTextFile(named: name, in: bundle) else {
-            return []
-        }
-
-        return contents.components(separatedBy: .newlines)
-    }
-}
-
-// MARK: -
-
-private extension StringLoader {
-
-    static func loadTextFile(named name: String, in bundle: Bundle) -> String? {
 
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               let filepath = bundle.path(forResource: name, ofType: .textFileExtension) else {
-            return nil
+            return []
         }
 
-        return try? String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
+        return load(withFilepath: filepath)
     }
 }
