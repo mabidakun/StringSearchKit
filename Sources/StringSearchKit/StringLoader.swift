@@ -33,11 +33,11 @@ public class StringLoader {
     /// Loads strings from a text file at the given file path.
     ///
     /// The file is expected to contain one string per line. Any line ending
-    /// (`\n`, `\r\n` or `\r`) separates lines, and empty lines are skipped.
-    /// Whitespace within a line is kept.
+    /// (`\n`, `\r\n` or `\r`) separates lines, and empty or whitespace-only
+    /// lines are skipped. Whitespace within a line is kept.
     ///
     /// - Parameter path: The absolute path to the text file.
-    /// - Returns: An array of strings, one per non-empty line, or an empty
+    /// - Returns: An array of strings, one per non-blank line, or an empty
     ///   array if the file cannot be read.
     public static func load(withFilepath path: String) -> [String] {
 
@@ -45,7 +45,10 @@ public class StringLoader {
             return []
         }
 
-        return contents.split(whereSeparator: \.isNewline).map(String.init)
+        return contents
+            .split(whereSeparator: \.isNewline)
+            .map(String.init)
+            .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
 
     /// Loads strings from a named text file resource in a bundle.
@@ -59,7 +62,7 @@ public class StringLoader {
     ///   - bundle: The bundle that contains the resource. Defaults to the
     ///     main bundle. Pass `Bundle.module` for a resource in a Swift
     ///     package target.
-    /// - Returns: An array of strings, one per non-empty line, or an empty
+    /// - Returns: An array of strings, one per non-blank line, or an empty
     ///   array if the resource cannot be found or read.
     public static func load(fromTextFileNamed name: String, in bundle: Bundle = .main) -> [String] {
 

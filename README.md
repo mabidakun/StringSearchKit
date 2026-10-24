@@ -101,7 +101,7 @@ let searchResults = stringDictionary.strings(withPrefix: "app")
 
 - Matching ignores case, including Unicode case rules: `"Straße"` matches the prefix `"strass"`, and `"İstanbul"` matches `"ist"`.
 - A prefix ignores leading whitespace, but trailing whitespace is part of it: `"new "` matches `"new york"` but not `"newark"`.
-- Text files may use `\n` or `\r\n` line endings. Empty lines are skipped.
+- Text files may use `\n` or `\r\n` line endings. Empty and whitespace-only lines are skipped.
 - Strings that differ only in case are stored once. The one added last decides the case of the result when `preserveCase` is `true`.
 
 
