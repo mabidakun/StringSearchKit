@@ -194,6 +194,32 @@ class StringDictionaryTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testAddString_PreservesCase_ReturnsOriginalCase() {
+        let expected = ["Act", "Apple"]
+        let wordDictionary = StringDictionary(withStrings: ["Act"], preserveCase: true)
+        wordDictionary.add(string: "Apple")
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testAddStrings_PreservesCase_ReturnsOriginalCase() {
+        let expected = ["App", "Apple"]
+        let wordDictionary = StringDictionary(withStrings: [], preserveCase: true)
+        wordDictionary.add(strings: ["Apple", "App"])
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testInitWithStrings_PreservesCase_WhitespaceWrappedString_ReturnsTrimmedOriginalCase() {
+        let expected = ["Apple"]
+        let wordDictionary = StringDictionary(withStrings: [" Apple\n"], preserveCase: true)
+        let actual = wordDictionary.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testInitWithTextFilePath_WhitespaceOnlyLine_IsNotStored() throws {
         let expected = ["act", "app"]
         let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).txt")
