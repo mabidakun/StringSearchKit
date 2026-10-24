@@ -1,4 +1,3 @@
-
 Pod::Spec.new do |s|
   s.name             = 'StringSearchKit'
   s.version          = '3.0.0'
