@@ -39,6 +39,18 @@ pod "StringSearchKit"
 
 Because it makes it really easy to implement **Auto-Complete** functionality in an application - as I did in my macOS™ app - [Sequence Diagram](https://itunes.apple.com/gb/app/sequence-diagram/id1195426709?mt=12) 
 
+### How does it work?
+
+`StringDictionary` stores its strings in a Trie: one node per character, with each string as a path from the root. A prefix search walks down the path for the prefix, then collects every string below that node, so its speed depends on the length of the prefix and the number of matches, not on the size of the dictionary.
+
+<!-- GitHub needs <picture> to show the diagram that matches its light or dark theme. -->
+<!-- markdownlint-disable MD033 -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/trie-dark.svg">
+  <img alt="A Trie that holds act, app, apple, apologise and apology. A search for the prefix app walks root, a, p, p, then collects app and apple." src="docs/trie-light.svg">
+</picture>
+<!-- markdownlint-enable MD033 -->
+
 ### How do I get started?
 
 #### Usage:
