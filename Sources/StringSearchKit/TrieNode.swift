@@ -23,16 +23,16 @@
 import Foundation
 
 class TrieNode: CustomStringConvertible {
-    
+
     let value: Character
     var isTerminating = false
-    private (set) weak var parent: TrieNode?
+    private(set) weak var parent: TrieNode?
     private var nodes: [Character: TrieNode] = [:]
-    
+
     var children: [Character: TrieNode] {
         return nodes
     }
-    
+
     var hasChildren: Bool {
         return !children.isEmpty
     }
@@ -40,13 +40,13 @@ class TrieNode: CustomStringConvertible {
     var description: String {
         return "\(value):\(nodes)"
     }
-    
+
     var canDelete: Bool {
         return !isTerminating && nodes.isEmpty
     }
-    
+
     // MARK: -
-    
+
     init(with value: Character, parent: TrieNode? = nil) {
         self.value = value
         self.parent = parent
@@ -55,9 +55,9 @@ class TrieNode: CustomStringConvertible {
     func delete() {
         parent?.nodes[value] = nil
     }
-    
+
     @discardableResult static func make(with character: Character, parent: TrieNode?) -> TrieNode {
-        
+
         let childNode = TrieNode(with: character, parent: parent)
         parent?.insert(child: childNode, character: character)
         return childNode

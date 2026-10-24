@@ -23,7 +23,7 @@
 import Foundation
 
 extension Sequence where Iterator.Element == String {
-    
+
     func addEntries(to trie: Trie) {
         forEach {
             trie.add(string: $0)

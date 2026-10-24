@@ -27,15 +27,15 @@ class Trie {
     private let head = TrieNode(with: "#")
 
     // MARK: -
-    
+
     func add(string aString: String) {
-        
+
         guard aString.hasMoreCharacters else {
             return
         }
-        
+
         let string = aString.normalized()
-        
+
         var current = head
         string.forEach { (character) in
             if let next = current.children[character] {
@@ -45,10 +45,10 @@ class Trie {
 
             current = TrieNode.make(with: character, parent: current)
         }
-        
+
         current.isTerminating = true
     }
-    
+
     func add(strings: [String]) {
         strings.forEach { (string) in
             add(string: string)
@@ -60,32 +60,32 @@ class Trie {
     }
 
     func contains(string: String) -> Bool {
-        
+
         var current: TrieNode? = head
 
         let word = string.normalized()
-        
+
         for character in word {
-            
+
             current = current?.children[character]
             if nil == current {
                 break
             }
         }
-        
+
         return current?.isTerminating ?? false
     }
 
     func strings(withPrefix prefix: String = "") -> [String] {
-        
+
         let values: NSMutableSet = NSMutableSet()
-        
+
         let word = prefix.normalized()
         strings(withPrefixWord: word,
                 prefix: word,
                 node: head,
                 accumulatedStrings: values)
-        
+
         return
             values
             .compactMap { $0 as? String }
@@ -96,45 +96,45 @@ class Trie {
 // MARK: -
 
 private extension Trie {
-    
+
     func remove(string: String, node: TrieNode? = nil) {
-        
+
         guard let firstChar = string.firstCharacter,
             let current = node?.children[firstChar]
             else {
                 return
         }
-        
+
         let remainingString = string.byChompingHead()
-        
+
         if !remainingString.hasMoreCharacters, current.isTerminating {
             current.isTerminating = false
         }
         else {
             remove(string: remainingString, node: current)
         }
-        
+
         if current.canDelete {
             current.delete()
         }
     }
-    
+
     func strings(withPrefixWord word: String,
                  prefix: String,
                  node: TrieNode? = nil,
                  accumulatedCharacters: String = "",
                  accumulatedStrings: NSMutableSet) {
-        
+
         guard let node = node else { return }
-        
+
         let nodeValue = nil == node.parent ? "" : String(node.value)
         let stringSoFar = "\(accumulatedCharacters)\(nodeValue)"
-        if node.isTerminating && stringSoFar.hasPrefix(word){
+        if node.isTerminating && stringSoFar.hasPrefix(word) {
             accumulatedStrings.add(stringSoFar)
         }
-        
+
         if !prefix.hasMoreCharacters {
-            
+
             for entry in node.children {
                 strings(withPrefixWord: word,
                         prefix: prefix,
@@ -144,12 +144,12 @@ private extension Trie {
             }
             return
         }
-        
+
         guard let character = prefix.firstCharacter,
             let child = node.children[character] else {
                 return
         }
-        
+
         strings(withPrefixWord: word,
                 prefix: prefix.byChompingHead(),
                 node: child,

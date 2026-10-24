@@ -22,23 +22,47 @@
 
 import Foundation
 
+/// A utility class that loads strings from text files.
+///
+/// `StringLoader` reads newline-delimited text files and returns their
+/// contents as an array of strings. It is typically used by
+/// ``StringDictionary`` to populate its trie from a file on disk or a
+/// bundled text resource.
 public class StringLoader {
-    
+
+    /// Loads strings from a text file at the given file path.
+    ///
+    /// The file is expected to contain one string per line. Leading and
+    /// trailing whitespace is trimmed from the file contents before splitting.
+    ///
+    /// - Parameter path: The absolute path to the text file.
+    /// - Returns: An array of strings, one per line, or an empty array if the
+    ///   file cannot be read.
     public static func load(withFilepath path: String) -> [String] {
-        
+
         guard let contents = try? String(contentsOfFile: path).trimmingCharacters(in: .whitespacesAndNewlines) else {
             return []
         }
-        
+
         return contents.components(separatedBy: .newlines)
     }
 
+    /// Loads strings from a named text file resource in the bundle.
+    ///
+    /// The file is located using the bundle that contains `StringLoader`
+    /// itself. It is expected to have a `.txt` extension and contain one
+    /// string per line.
+    ///
+    /// - Parameter name: The name of the text file resource, without the
+    ///   `.txt` extension.
+    /// - Returns: An array of strings, one per line, or an empty array if the
+    ///   resource cannot be found or read.
     public static func load(fromTextFileNamed name: String) -> [String] {
-        
+
         guard let contents = loadTextFile(named: name) else {
             return []
         }
-        
+
         return contents.components(separatedBy: .newlines)
     }
 }
@@ -46,9 +70,9 @@ public class StringLoader {
 // MARK: -
 
 private extension StringLoader {
-    
+
     static func loadTextFile(named name: String) -> String? {
-        
+
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               let filepath = Bundle(for: self).path(forResource: name, ofType: .textFileExtension) else {
             return nil

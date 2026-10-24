@@ -23,13 +23,13 @@
 import Foundation
 
 extension String {
-    
+
     static let textFileExtension = "txt"
 
     var hasMoreCharacters: Bool {
         return !isEmpty
     }
-    
+
     var firstCharacter: Character? {
         return first
     }
@@ -37,7 +37,7 @@ extension String {
     func normalized() -> String {
         return lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
-    
+
     func byChompingHead() -> String {
         return String(dropFirst())
     }
