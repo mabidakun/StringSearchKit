@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 824 352" width="824" height="352" role="img" aria-label="A trie holding act, app, apple, apologise and apology. Each node is one character; nodes that end a word are double-ringed. Searching for the prefix app walks root, a, p, p, then collects every word below that node: app and apple.">
+  <title>A trie holding act, app, apple, apologise and apology. Each node is one character; nodes that end a word are double-ringed. Searching for the prefix app walks root, a, p, p, then collects every word below that node: app and apple.</title>
+  <path d="M57,122 H103" fill="none" stroke="#4493f8" stroke-width="2.5"/>
+  <path d="M131.9,110.1 C160.0,122 160.0,46 183,46" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M217,46 H263" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M137,122 H183" fill="none" stroke="#4493f8" stroke-width="2.5"/>
+  <path d="M217,122 H263" fill="none" stroke="#4493f8" stroke-width="2.5"/>
+  <path d="M297,122 H343" fill="none" stroke="#4493f8" stroke-width="2.5"/>
+  <path d="M377,122 H423" fill="none" stroke="#4493f8" stroke-width="2.5"/>
+  <path d="M211.9,133.9 C240.0,122 240.0,198 263,198" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M297,198 H343" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M377,198 H423" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M457,198 H503" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M537,198 H583" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M617,198 H663" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M697,198 H743" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <path d="M531.9,209.9 C560.0,198 560.0,274 583,274" fill="none" stroke="#9198a1" stroke-width="1.5"/>
+  <rect x="18" y="109" width="44" height="26" rx="6" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="40" y="126" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#e6edf3">root</text>
+  <circle cx="120" cy="122" r="17" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="120" y="127" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">a</text>
+  <circle cx="200" cy="46" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="200" y="51" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">c</text>
+  <circle cx="280" cy="46" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <circle cx="280" cy="46" r="13" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="280" y="78" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#9198a1">act</text>
+  <text x="280" y="51" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">t</text>
+  <circle cx="200" cy="122" r="17" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="200" y="127" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">p</text>
+  <circle cx="280" cy="122" r="17" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <circle cx="280" cy="122" r="13" fill="none" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="280" y="154" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#9198a1">app</text>
+  <text x="280" y="127" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">p</text>
+  <circle cx="360" cy="122" r="17" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="360" y="127" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">l</text>
+  <circle cx="440" cy="122" r="17" fill="#0d1117" stroke="#4493f8" stroke-width="1.5"/>
+  <circle cx="440" cy="122" r="13" fill="none" stroke="#4493f8" stroke-width="1.5"/>
+  <text x="440" y="154" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#9198a1">apple</text>
+  <text x="440" y="127" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">e</text>
+  <circle cx="280" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="280" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">o</text>
+  <circle cx="360" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="360" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">l</text>
+  <circle cx="440" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="440" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">o</text>
+  <circle cx="520" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="520" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">g</text>
+  <circle cx="600" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="600" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">i</text>
+  <circle cx="680" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="680" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">s</text>
+  <circle cx="760" cy="198" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <circle cx="760" cy="198" r="13" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="760" y="230" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#9198a1">apologise</text>
+  <text x="760" y="203" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">e</text>
+  <circle cx="600" cy="274" r="17" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <circle cx="600" cy="274" r="13" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="600" y="306" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#9198a1">apology</text>
+  <text x="600" y="279" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#e6edf3">y</text>
+  <text x="500" y="114" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4493f8">strings(withPrefix: "app")</text>
+  <text x="500" y="132" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4493f8">→ ["app", "apple"]</text>
+  <circle cx="48" cy="330" r="11" fill="#0d1117" stroke="#e6edf3" stroke-width="1.5"/>
+  <circle cx="48" cy="330" r="7" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+  <text x="68" y="334" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#e6edf3">end of a word (isTerminating)</text>
+  <line x1="290" y1="330" x2="330" y2="330" stroke="#4493f8" stroke-width="2.5"/>
+  <text x="340" y="334" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#e6edf3">path searched by strings(withPrefix: "app")</text>
+</svg>

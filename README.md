@@ -2,37 +2,61 @@
 
 A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, string searching, using a Trie.
 
-
-[![CI Status](http://img.shields.io/travis/mabidakun/StringSearchKit.svg?style=flat)](https://travis-ci.org/mabidakun/StringSearchKit)
-[![Version](https://img.shields.io/cocoapods/v/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
-[![License](https://img.shields.io/cocoapods/l/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
-[![Platform](https://img.shields.io/cocoapods/p/StringSearchKit.svg?style=flat)](http://cocoapods.org/pods/StringSearchKit)
+[![CI](https://github.com/mabidakun/StringSearchKit/actions/workflows/ci.yml/badge.svg)](https://github.com/mabidakun/StringSearchKit/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/mabidakun/StringSearchKit.svg?style=flat)](LICENSE)
 
 ## Requirements
-   - macOS 10.11+
-   - iOS 9+
-   - tvOS 9+
-   
+   - macOS 12+
+   - iOS 15+
+   - tvOS 15+
+   - Swift 5.9+
+
 ## Installation
 
-StringSearchKit is available through [CocoaPods](https://cocoapods.org/?q=stringsearchkit). To install
-it, simply add the following line to your Podfile:
+### Swift Package Manager
+
+In Xcode, choose **File > Add Package Dependencies…** and enter `https://github.com/mabidakun/StringSearchKit.git`.
+
+Or add it to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/mabidakun/StringSearchKit.git", from: "3.0.0")
+]
+```
+
+Then add `"StringSearchKit"` to your target's dependencies.
+
+### CocoaPods
+
+CocoaPods Trunk goes read-only on 2 December 2026, so 3.0.0 is the final version published there. Swift Package Manager is the supported route for future releases.
 
 ```ruby
 pod "StringSearchKit"
 ```
 
-
 ### Why is this framework useful?
 
 Because it makes it really easy to implement **Auto-Complete** functionality in an application - as I did in my macOS™ app - [Sequence Diagram](https://itunes.apple.com/gb/app/sequence-diagram/id1195426709?mt=12) 
+
+### How does it work?
+
+`StringDictionary` stores its strings in a Trie: one node per character, with each string as a path from the root. A prefix search walks down the path for the prefix, then collects every string below that node, so its speed depends on the length of the prefix and the number of matches, not on the size of the dictionary.
+
+<!-- GitHub needs <picture> to show the diagram that matches its light or dark theme. -->
+<!-- markdownlint-disable MD033 -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/trie-dark.svg">
+  <img alt="A Trie that holds act, app, apple, apologise and apology. A search for the prefix app walks root, a, p, p, then collects app and apple." src="docs/trie-light.svg">
+</picture>
+<!-- markdownlint-enable MD033 -->
 
 ### How do I get started?
 
 #### Usage:
 
    - `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
-   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, preserveCase: Bool = false)`
+   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, bundle: Bundle = .main, preserveCase: Bool = false)`
    - `StringDictionary(withTextFilepath: <The path to a text file>), preserveCase: Bool = false`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.
