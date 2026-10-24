@@ -80,6 +80,12 @@ class String_AdditionsTests: XCTestCase {
 
     // MARK: - normalizedPrefix tests
 
+    func testNormalizedPrefix_LeadingZeroWidthSpace_RemovesItLikeNormalized() {
+        let expected = "\u{200B}APP".normalized()
+        let actual = "\u{200B}APP".normalizedPrefix()
+        XCTAssertEqual(expected, actual)
+    }
+
     func testNormalizedPrefix_StringWrappedInWhitespace_KeepsTrailingWhitespace() {
         let expected = "new "
         let actual = "  NEW ".normalizedPrefix()

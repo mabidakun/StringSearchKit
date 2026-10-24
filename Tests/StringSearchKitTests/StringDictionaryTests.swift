@@ -249,6 +249,22 @@ class StringDictionaryTests: XCTestCase {
         XCTAssertTrue(wordDictionary.contains(string: "STRASSE"))
     }
 
+    func testStringsWithPrefix_LeadingZeroWidthSpace_MatchesLikeContains() {
+        let expected = ["apple"]
+        let wordDictionary = StringDictionary(withStrings: ["\u{200B}apple"])
+        let actual = wordDictionary.strings(withPrefix: "\u{200B}app")
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testStringsWithPrefix_CombiningMarkAfterLeadingSpace_MatchesLikeContains() {
+        let expected = ["\u{301}new"]
+        let wordDictionary = StringDictionary(withStrings: [" \u{301}new"])
+        let actual = wordDictionary.strings(withPrefix: " \u{301}new")
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testInitWithStrings_PreservesCase_CaseVariants_ReturnsLastAdded() {
         let expected = ["APPLE"]
         let wordDictionary = StringDictionary(withStrings: ["Apple", "apple", "APPLE"], preserveCase: true)

@@ -38,8 +38,10 @@ extension String {
         return trimmingCharacters(in: .whitespacesAndNewlines).caseFolded()
     }
 
+    // Trims leading whitespace with the same character set as normalized(), so prefixes and stored strings agree.
     func normalizedPrefix() -> String {
-        return String(drop(while: \.isWhitespace)).caseFolded()
+        let trimmed = unicodeScalars.drop(while: CharacterSet.whitespacesAndNewlines.contains)
+        return String(String.UnicodeScalarView(trimmed)).caseFolded()
     }
 
     // Case folding maps "İ" to "i" plus U+0307; drop the dot so "İstanbul" matches "ist".
