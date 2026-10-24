@@ -28,7 +28,7 @@ class StringSearchKitTestHelper {
     private static let DictionaryTextFilename = "example-dictionary"
     
     static var exampleFilepath: String {
-        guard let path = Bundle(for: self).path(forResource: DictionaryTextFilename, ofType: "txt") else {
+        guard let path = Bundle.module.path(forResource: DictionaryTextFilename, ofType: "txt") else {
             XCTFail("Failed to find path to file in bundle: \(DictionaryTextFilename)")
             return ""
         }
