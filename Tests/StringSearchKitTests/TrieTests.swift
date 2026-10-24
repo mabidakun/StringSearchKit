@@ -222,6 +222,14 @@ class TrieTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testStringsWithPrefix_DecomposedPrefixForPrecomposedString_ReturnsStoredScalars() {
+        let expected = Array("caf\u{E9}".unicodeScalars)
+        trie.add(string: "caf\u{E9}")
+        let actual = trie.strings(withPrefix: "CAFE\u{301}").first.map { Array($0.unicodeScalars) }
+
+        XCTAssertEqual(expected, actual)
+    }
+
     // MARK: - long strings
 
     // Background threads have a small stack, so recursion per character overflows it.

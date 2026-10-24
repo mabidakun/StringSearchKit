@@ -80,11 +80,11 @@ class Trie {
 
         let word = prefix.normalizedPrefix()
 
-        guard let prefixNode = node(reaching: word) else {
+        guard let (prefixNode, storedPrefix) = node(reaching: word) else {
             return []
         }
 
-        return strings(below: prefixNode, prefix: word).sorted()
+        return strings(below: prefixNode, prefix: storedPrefix).sorted()
     }
 }
 
@@ -114,18 +114,21 @@ private extension Trie {
         }
     }
 
-    func node(reaching word: String) -> TrieNode? {
+    // Returns the node at the end of `word` and the stored text of that path, which may differ in bytes from `word` (for example a precomposed "é").
+    func node(reaching word: String) -> (node: TrieNode, storedPrefix: String)? {
 
         var current = head
+        var storedPrefix: [Character] = []
 
         for character in word {
             guard let next = current.children[character] else {
                 return nil
             }
             current = next
+            storedPrefix.append(next.value)
         }
 
-        return current
+        return (current, String(storedPrefix))
     }
 
     // Depth-first walk with an explicit stack, so long strings cannot overflow the call stack.
