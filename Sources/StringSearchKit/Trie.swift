@@ -78,18 +78,13 @@ class Trie {
 
     func strings(withPrefix prefix: String = "") -> [String] {
 
-        let values: NSMutableSet = NSMutableSet()
-
         let word = prefix.normalizedPrefix()
-        strings(withPrefixWord: word,
-                prefix: word,
-                node: head,
-                accumulatedStrings: values)
 
-        return
-            values
-            .compactMap { $0 as? String }
-            .sorted()
+        guard let prefixNode = node(reaching: word) else {
+            return []
+        }
+
+        return strings(below: prefixNode, prefix: word).sorted()
     }
 }
 
@@ -119,42 +114,44 @@ private extension Trie {
         }
     }
 
-    func strings(withPrefixWord word: String,
-                 prefix: String,
-                 node: TrieNode? = nil,
-                 accumulatedCharacters: String = "",
-                 accumulatedStrings: NSMutableSet) {
+    func node(reaching word: String) -> TrieNode? {
 
-        guard let node = node else { return }
+        var current = head
 
-        let nodeValue = nil == node.parent ? "" : String(node.value)
-        let stringSoFar = "\(accumulatedCharacters)\(nodeValue)"
-        if node.isTerminating && stringSoFar.hasPrefix(word) {
-            accumulatedStrings.add(stringSoFar)
-        }
-
-        if !prefix.hasMoreCharacters {
-
-            for entry in node.children {
-                strings(withPrefixWord: word,
-                        prefix: prefix,
-                        node: entry.value,
-                        accumulatedCharacters: stringSoFar,
-                        accumulatedStrings: accumulatedStrings)
+        for character in word {
+            guard let next = current.children[character] else {
+                return nil
             }
-            return
+            current = next
         }
 
-        guard let character = prefix.firstCharacter,
-            let child = node.children[character] else {
-                return
+        return current
+    }
+
+    // Depth-first walk with an explicit stack, so long strings cannot overflow the call stack.
+    func strings(below start: TrieNode, prefix: String) -> [String] {
+
+        var results: [String] = []
+        var path: [Character] = []
+        var pending: [(node: TrieNode, depth: Int)] = [(start, 0)]
+
+        while let (node, depth) = pending.popLast() {
+
+            path.removeLast(path.count - max(depth - 1, 0))
+            if depth > 0 {
+                path.append(node.value)
+            }
+
+            if node.isTerminating {
+                results.append(prefix + String(path))
+            }
+
+            for child in node.children.values {
+                pending.append((child, depth + 1))
+            }
         }
 
-        strings(withPrefixWord: word,
-                prefix: prefix.byChompingHead(),
-                node: child,
-                accumulatedCharacters: stringSoFar,
-                accumulatedStrings: accumulatedStrings)
+        return results
     }
 }
 

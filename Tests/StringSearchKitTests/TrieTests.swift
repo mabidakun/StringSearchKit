@@ -218,8 +218,39 @@ class TrieTests: XCTestCase {
         let expected = ["a", "bob", "abc", "bobbing", "bobbled"].sorted()
         trie.add(strings: expected)
         let actual = trie.strings()
-        
+
         XCTAssertEqual(expected, actual)
+    }
+
+    // MARK: - long strings
+
+    // Background threads have a small stack, so recursion per character overflows it.
+    func testStringsWithPrefix_LongStringOnBackgroundThread_ReturnsString() {
+        let longString = String(repeating: "a", count: 20_000)
+        var actual: [String] = []
+        let finished = expectation(description: "search finished")
+        DispatchQueue.global().async {
+            let trie = Trie()
+            trie.add(string: longString)
+            actual = trie.strings(withPrefix: "a")
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 30)
+
+        XCTAssertEqual([longString], actual)
+    }
+
+    func testDeinit_LongStringOnBackgroundThread_FreesWithoutCrashing() {
+        let finished = expectation(description: "trie freed")
+        DispatchQueue.global().async {
+            autoreleasepool {
+                let trie = Trie()
+                trie.add(string: String(repeating: "a", count: 20_000))
+            }
+            finished.fulfill()
+        }
+
+        wait(for: [finished], timeout: 30)
     }
 }
 
