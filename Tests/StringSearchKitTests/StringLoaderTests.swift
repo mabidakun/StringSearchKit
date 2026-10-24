@@ -62,6 +62,16 @@ class StringLoaderTests: XCTestCase {
         XCTAssertEqual(expected, actual.count)
     }
 
+    func testLoadDictionary_CRLFAndBlankLines_ReturnsOnlyNonEmptyLines() throws {
+        let expected = ["apple", " banana ", "cherry"]
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).txt")
+        try "apple\r\n banana \r\n\r\n\ncherry\r\n".write(to: fileURL, atomically: true, encoding: .utf8)
+        defer { try? FileManager.default.removeItem(at: fileURL) }
+        let actual = StringLoader.load(withFilepath: fileURL.path)
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testLoadDictionary_ExistingFilename_ReturnsPopulatedArray() {
         
         let expected = 13
