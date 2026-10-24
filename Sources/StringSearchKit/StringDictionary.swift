@@ -26,12 +26,10 @@ import Foundation
 ///
 /// `StringDictionary` wraps a trie data structure to provide efficient
 /// prefix matching and membership testing for a collection of strings.
-/// It is used by the editor's auto-completion system to suggest completions
-/// as the user types DSL keywords.
 ///
-/// Strings can be loaded from an array, a named text file resource in the
-/// framework bundle, or a file path on disk. Each string in the file should
-/// appear on its own line.
+/// Strings can be loaded from an array, a named text file resource in a
+/// bundle (the main bundle by default), or a file path on disk. Each string
+/// in the file should appear on its own line.
 ///
 /// ## Case Sensitivity
 ///
