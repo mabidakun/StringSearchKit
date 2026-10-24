@@ -1,6 +1,6 @@
 # StringSearchKit
 
-A simple library for macOS/iOS/tvOS - enabling fast, in memory, prefix based, string searching, using a Trie.
+A simple library for macOS, iOS and tvOS that enables fast, in-memory, prefix-based string searching using a trie.
 
 [![CI](https://github.com/mabidakun/StringSearchKit/actions/workflows/ci.yml/badge.svg)](https://github.com/mabidakun/StringSearchKit/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/mabidakun/StringSearchKit.svg?style=flat)](LICENSE)
