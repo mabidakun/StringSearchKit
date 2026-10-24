@@ -46,6 +46,22 @@ class StringLoaderTests: XCTestCase {
         XCTAssertEqual(expected, actual.count)
     }
 
+    func testLoadDictionary_ExistingFilenameInBundle_ReturnsPopulatedArray() {
+        let expected = 13
+        let actual = StringLoader.load(fromTextFileNamed: StringSearchKitTestHelper.exampleTextFileName,
+                                       in: StringSearchKitTestHelper.exampleBundle)
+
+        XCTAssertEqual(expected, actual.count)
+    }
+
+    func testLoadDictionary_ExistingFilenameNotInBundle_ReturnsEmptyArray() {
+        let expected = 0
+        let actual = StringLoader.load(fromTextFileNamed: StringSearchKitTestHelper.exampleTextFileName,
+                                       in: Bundle(for: StringLoaderTests.self))
+
+        XCTAssertEqual(expected, actual.count)
+    }
+
     func testLoadDictionary_ExistingFilename_ReturnsPopulatedArray() {
         
         let expected = 13

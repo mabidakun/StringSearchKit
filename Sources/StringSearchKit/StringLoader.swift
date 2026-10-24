@@ -47,19 +47,22 @@ public class StringLoader {
         return contents.components(separatedBy: .newlines)
     }
 
-    /// Loads strings from a named text file resource in the bundle.
+    /// Loads strings from a named text file resource in a bundle.
     ///
-    /// The file is located using the bundle that contains `StringLoader`
-    /// itself. It is expected to have a `.txt` extension and contain one
+    /// The file is expected to have a `.txt` extension and contain one
     /// string per line.
     ///
-    /// - Parameter name: The name of the text file resource, without the
-    ///   `.txt` extension.
+    /// - Parameters:
+    ///   - name: The name of the text file resource, without the `.txt`
+    ///     extension.
+    ///   - bundle: The bundle that contains the resource. Defaults to the
+    ///     main bundle. Pass `Bundle.module` for a resource in a Swift
+    ///     package target.
     /// - Returns: An array of strings, one per line, or an empty array if the
     ///   resource cannot be found or read.
-    public static func load(fromTextFileNamed name: String) -> [String] {
+    public static func load(fromTextFileNamed name: String, in bundle: Bundle = .main) -> [String] {
 
-        guard let contents = loadTextFile(named: name) else {
+        guard let contents = loadTextFile(named: name, in: bundle) else {
             return []
         }
 
@@ -71,10 +74,10 @@ public class StringLoader {
 
 private extension StringLoader {
 
-    static func loadTextFile(named name: String) -> String? {
+    static func loadTextFile(named name: String, in bundle: Bundle) -> String? {
 
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-              let filepath = Bundle(for: self).path(forResource: name, ofType: .textFileExtension) else {
+              let filepath = bundle.path(forResource: name, ofType: .textFileExtension) else {
             return nil
         }
 

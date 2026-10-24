@@ -44,7 +44,7 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
 #### Usage:
 
    - `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
-   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, preserveCase: Bool = false)`
+   - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, bundle: Bundle = .main, preserveCase: Bool = false)`
    - `StringDictionary(withTextFilepath: <The path to a text file>), preserveCase: Bool = false`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.

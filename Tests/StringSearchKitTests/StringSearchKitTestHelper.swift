@@ -39,4 +39,8 @@ class StringSearchKitTestHelper {
     static var exampleTextFileName: String {
         return DictionaryTextFilename
     }
+
+    static var exampleBundle: Bundle {
+        return Bundle.module
+    }
 }

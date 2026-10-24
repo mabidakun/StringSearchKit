@@ -184,7 +184,16 @@ class StringDictionaryTests: XCTestCase {
                                               preserveCase: true)
         XCTAssertTrue(wordDictionary.preservesCase)
     }
-    
+
+    func testInitWithTextFileNamed_InBundle_LoadsStringsFromBundle() {
+        let expected = ["deactivate"]
+        let wordDictionary = StringDictionary(withTextFileNamed: StringSearchKitTestHelper.exampleTextFileName,
+                                              bundle: StringSearchKitTestHelper.exampleBundle)
+        let actual = wordDictionary.strings(withPrefix: "de")
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testContains_PreservesCase_Activate_ReturnsTrue() {
         let wordDictionary = StringDictionary(withStrings: ["Activate"], preserveCase: true)
 

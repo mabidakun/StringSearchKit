@@ -67,18 +67,21 @@ public class StringDictionary: StringDictionaryType {
     }
 
     /// Creates a string dictionary by loading strings from a text file resource
-    /// in the bundle.
+    /// in a bundle.
     ///
     /// The file is expected to contain one string per line. If the file cannot
     /// be found, the dictionary is created empty.
     ///
     /// - Parameters:
     ///   - filename: The name of the text file resource (without the `.txt`
-    ///     extension) to load from the bundle.
+    ///     extension) to load from `bundle`.
+    ///   - bundle: The bundle that contains the resource. Defaults to the
+    ///     main bundle. Pass `Bundle.module` for a resource in a Swift
+    ///     package target.
     ///   - preserveCase: When `true`, results from ``strings(withPrefix:)``
     ///     retain their original casing. Defaults to `false`.
-    public convenience init(withTextFileNamed filename: String, preserveCase: Bool = false) {
-        self.init(withStrings: StringLoader.load(fromTextFileNamed: filename), preserveCase: preserveCase)
+    public convenience init(withTextFileNamed filename: String, bundle: Bundle = .main, preserveCase: Bool = false) {
+        self.init(withStrings: StringLoader.load(fromTextFileNamed: filename, in: bundle), preserveCase: preserveCase)
     }
 
     /// Creates a string dictionary by loading strings from a text file at the
