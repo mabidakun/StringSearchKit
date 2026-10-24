@@ -57,7 +57,7 @@ Because it makes it really easy to implement **Auto-Complete** functionality in 
 
    - `StringDictionary(withStrings: [String], preserveCase: Bool = false)`
    - `StringDictionary(withTextFileNamed: <A name of a text file in your Bundle>, bundle: Bundle = .main, preserveCase: Bool = false)`
-   - `StringDictionary(withTextFilepath: <The path to a text file>), preserveCase: Bool = false`
+   - `StringDictionary(withTextFilepath: <The path to a text file>, preserveCase: Bool = false)`
    
 Using one of the initialisers above, create an instance of `StringDictionary`.
 
@@ -81,6 +81,14 @@ let stringDictionary = StringDictionary(withStrings: ["act", "app", "apple", "ap
 let searchResults = stringDictionary.strings(withPrefix: "app")
 
 // searchResults will then contain ["app", "apple"]
+```
+
+Call `strings()` with no prefix to get every string in the dictionary.
+
+```swift
+let allStrings = stringDictionary.strings()
+
+// allStrings will then contain ["act", "apologise", "apology", "app", "apple"]
 ```
 
 ### Search Result Case Preservation
