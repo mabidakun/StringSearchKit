@@ -36,6 +36,9 @@ import Foundation
 /// By default, lookups are case-insensitive. When `preserveCase` is `true`,
 /// results returned by ``strings(withPrefix:)`` retain their original casing.
 ///
+/// Strings that differ only in case are stored once. With `preserveCase`,
+/// results use the casing of the one added last.
+///
 /// ## Example
 ///
 /// ```swift
