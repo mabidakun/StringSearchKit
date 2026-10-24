@@ -152,7 +152,7 @@ class TrieTests: XCTestCase {
     func testStrings_ReturnsExpected() {
         
         let expected = ["fix", "fixed", "fixer"]
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings()
         
         XCTAssertEqual(expected, actual)
@@ -161,7 +161,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_A_ReturnsExpected() {
         
         let input = ["a", "abc", "bc", "bob"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         
         let actual = trie.strings(withPrefix: "a")
         
@@ -171,7 +171,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_Bob_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bob")
         
         XCTAssertEqual(["bob", "bobbing"], actual)
@@ -180,7 +180,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_MixedCase_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "BoB")
         
         XCTAssertEqual(["bob", "bobbing"], actual)
@@ -189,7 +189,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_LongerPrefix_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bobb")
         
         XCTAssertEqual(["bobbing"], actual)
@@ -198,7 +198,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_LongerPrefixMultipleWords_ReturnsExpected() {
         
         let input = ["a", "bob", "abc", "bobbing", "bobbled"]
-        input.addEntries(to: trie)
+        trie.add(strings: input)
         let actual = trie.strings(withPrefix: "bobb")
         
         XCTAssertEqual(["bobbing", "bobbled"], actual)
@@ -207,7 +207,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_EmptyString_ReturnsExpected() {
         
         let expected = ["a", "bob", "abc", "bobbing", "bobbled"].sorted()
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings(withPrefix: "")
         
         XCTAssertEqual(expected, actual)
@@ -216,7 +216,7 @@ class TrieTests: XCTestCase {
     func testStringsWithPrefix_NoString_ReturnsExpected() {
         
         let expected = ["a", "bob", "abc", "bobbing", "bobbled"].sorted()
-        expected.addEntries(to: trie)
+        trie.add(strings: expected)
         let actual = trie.strings()
         
         XCTAssertEqual(expected, actual)
