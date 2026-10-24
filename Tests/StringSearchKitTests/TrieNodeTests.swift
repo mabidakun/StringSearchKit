@@ -126,4 +126,15 @@ class TrieNodeTests: XCTestCase {
       
         XCTAssertNil(child.parent)
     }
+
+    func testDeinit_ChildHeldElsewhere_KeepsItsChildren() {
+        let expected = 1
+        var root: TrieNode? = TrieNode(with: "#")
+        let child = TrieNode.make(with: "a", parent: root)
+        TrieNode.make(with: "b", parent: child)
+        root = nil
+        let actual = child.children.count
+
+        XCTAssertEqual(expected, actual)
+    }
 }

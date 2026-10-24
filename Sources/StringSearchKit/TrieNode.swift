@@ -53,11 +53,15 @@ class TrieNode: CustomStringConvertible {
     }
 
     // Free descendants one at a time; letting each node free its children recursively overflows the stack for long strings.
+    // A node that something else still holds keeps its subtree.
     deinit {
         var descendants = Array(nodes.values)
         nodes.removeAll()
 
-        while let node = descendants.popLast() {
+        while var node = descendants.popLast() {
+            guard isKnownUniquelyReferenced(&node) else {
+                continue
+            }
             descendants.append(contentsOf: node.nodes.values)
             node.nodes.removeAll()
         }
