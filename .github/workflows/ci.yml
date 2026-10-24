@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode 26.6
+        run: sudo xcode-select -s /Applications/Xcode_26.6.app
+      - name: Test (macOS)
+        run: swift test
+      - name: Build (iOS)
+        run: xcodebuild -scheme StringSearchKit -destination 'generic/platform=iOS' build
+      - name: Build (tvOS)
+        run: xcodebuild -scheme StringSearchKit -destination 'generic/platform=tvOS' build
+      - name: Lint podspec
+        run: pod lib lint
