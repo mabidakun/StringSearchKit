@@ -38,6 +38,19 @@ class TrieTests: XCTestCase {
         XCTAssertFalse(trie.contains(string: ""))
     }
 
+    func testAddString_WhitespaceOnly_IsNotStored() {
+        let expected: [String] = []
+        trie.add(string: " \t\n")
+        let actual = trie.strings()
+
+        XCTAssertEqual(expected, actual)
+    }
+
+    func testAddString_WhitespaceOnly_ContainsEmptyStringIsFalse() {
+        trie.add(string: " \t\n")
+        XCTAssertFalse(trie.contains(string: ""))
+    }
+
     func testAddString_Word_ContainsWordIsTrue() {
         let word = "word"
         trie.add(string: word)

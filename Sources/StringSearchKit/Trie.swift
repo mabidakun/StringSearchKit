@@ -30,11 +30,11 @@ class Trie {
 
     func add(string aString: String) {
 
-        guard aString.hasMoreCharacters else {
+        let string = aString.normalized()
+
+        guard string.hasMoreCharacters else {
             return
         }
-
-        let string = aString.normalized()
 
         var current = head
         string.forEach { (character) in
