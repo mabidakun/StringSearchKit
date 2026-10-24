@@ -34,24 +34,6 @@ class String_AdditionsTests: XCTestCase {
         XCTAssertFalse("".hasMoreCharacters)
     }
     
-    // MARK: - firstCharacter tests
-
-    func testFirstCharacter_EmptyString_ReturnsNil() {
-        XCTAssertNil("".firstCharacter)
-    }
-    
-    func testFirstCharacter_A_ReturnsA() {
-        let expected: Character = "A"
-        let actual = "A".firstCharacter
-        XCTAssertEqual(expected, actual)
-    }
-
-    func testFirstCharacter_CBA_ReturnsC() {
-        let expected: Character = "C"
-        let actual = "CBA".firstCharacter
-        XCTAssertEqual(expected, actual)
-    }
-    
     // MARK: - normalized tests
     
     func testNormalized_VALUE_ReturnsLowerCasedValue() {
@@ -89,26 +71,6 @@ class String_AdditionsTests: XCTestCase {
     func testNormalizedPrefix_StringWrappedInWhitespace_KeepsTrailingWhitespace() {
         let expected = "new "
         let actual = "  NEW ".normalizedPrefix()
-        XCTAssertEqual(expected, actual)
-    }
-
-    // MARK:- byChompingHead tests
-    
-    func testByChompingHead_EmptyString_ReturnsEmptyString() {
-        let expected = ""
-        let actual = "".byChompingHead()
-        XCTAssertEqual(expected, actual)
-    }
-
-    func testByChompingHead_A_ReturnsEmptyString() {
-        let expected = ""
-        let actual = "A".byChompingHead()
-        XCTAssertEqual(expected, actual)
-    }
-
-    func testByChompingHead_ABC_ReturnsBC() {
-        let expected = "Bc"
-        let actual = "ABc".byChompingHead()
         XCTAssertEqual(expected, actual)
     }
 }

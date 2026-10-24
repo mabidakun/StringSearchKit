@@ -56,7 +56,27 @@ class Trie {
     }
 
     func remove(string: String) {
-        remove(string: string.normalized(), node: head)
+
+        var path: [TrieNode] = []
+        var current = head
+
+        for character in string.normalized() {
+            guard let next = current.children[character] else {
+                return
+            }
+            current = next
+            path.append(next)
+        }
+
+        current.isTerminating = false
+
+        // Prune from the end of the string back towards the root, stopping at the first node still in use.
+        for node in path.reversed() {
+            guard node.canDelete else {
+                return
+            }
+            node.delete()
+        }
     }
 
     func contains(string: String) -> Bool {
@@ -91,28 +111,6 @@ class Trie {
 // MARK: -
 
 private extension Trie {
-
-    func remove(string: String, node: TrieNode? = nil) {
-
-        guard let firstChar = string.firstCharacter,
-            let current = node?.children[firstChar]
-            else {
-                return
-        }
-
-        let remainingString = string.byChompingHead()
-
-        if !remainingString.hasMoreCharacters, current.isTerminating {
-            current.isTerminating = false
-        }
-        else {
-            remove(string: remainingString, node: current)
-        }
-
-        if current.canDelete {
-            current.delete()
-        }
-    }
 
     // Returns the node at the end of `word` and the stored text of that path, which may differ in bytes from `word` (for example a precomposed "é").
     func node(reaching word: String) -> (node: TrieNode, storedPrefix: String)? {

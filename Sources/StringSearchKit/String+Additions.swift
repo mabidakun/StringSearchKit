@@ -30,10 +30,6 @@ extension String {
         return !isEmpty
     }
 
-    var firstCharacter: Character? {
-        return first
-    }
-
     func normalized() -> String {
         return trimmingCharacters(in: .whitespacesAndNewlines).caseFolded()
     }
@@ -48,9 +44,5 @@ extension String {
     private func caseFolded() -> String {
         return folding(options: .caseInsensitive, locale: nil)
             .replacingOccurrences(of: "i\u{307}", with: "i")
-    }
-
-    func byChompingHead() -> String {
-        return String(dropFirst())
     }
 }

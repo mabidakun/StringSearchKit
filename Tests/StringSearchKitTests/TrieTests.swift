@@ -248,6 +248,23 @@ class TrieTests: XCTestCase {
         XCTAssertEqual([longString], actual)
     }
 
+    func testRemoveString_LongStringOnBackgroundThread_LeavesTrieEmpty() {
+        let expected: [String] = []
+        var actual: [String] = ["not run"]
+        let finished = expectation(description: "remove finished")
+        DispatchQueue.global().async {
+            let trie = Trie()
+            let longString = String(repeating: "a", count: 20_000)
+            trie.add(string: longString)
+            trie.remove(string: longString)
+            actual = trie.strings()
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 30)
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testDeinit_LongStringOnBackgroundThread_FreesWithoutCrashing() {
         let finished = expectation(description: "trie freed")
         DispatchQueue.global().async {
