@@ -38,6 +38,10 @@ extension String {
         return lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    func normalizedPrefix() -> String {
+        return String(lowercased().drop(while: \.isWhitespace))
+    }
+
     func byChompingHead() -> String {
         return String(dropFirst())
     }

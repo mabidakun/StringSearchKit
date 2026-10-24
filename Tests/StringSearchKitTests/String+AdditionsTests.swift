@@ -66,6 +66,14 @@ class String_AdditionsTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    // MARK: - normalizedPrefix tests
+
+    func testNormalizedPrefix_StringWrappedInWhitespace_KeepsTrailingWhitespace() {
+        let expected = "new "
+        let actual = "  NEW ".normalizedPrefix()
+        XCTAssertEqual(expected, actual)
+    }
+
     // MARK:- byChompingHead tests
     
     func testByChompingHead_EmptyString_ReturnsEmptyString() {

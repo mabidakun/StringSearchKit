@@ -220,6 +220,14 @@ class StringDictionaryTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
 
+    func testStringsWithPrefix_TrailingSpace_MatchesOnlyStringsWithThatSpace() {
+        let expected = ["new york"]
+        let wordDictionary = StringDictionary(withStrings: ["new york", "newark"])
+        let actual = wordDictionary.strings(withPrefix: "new ")
+
+        XCTAssertEqual(expected, actual)
+    }
+
     func testInitWithStrings_PreservesCase_CaseVariants_ReturnsLastAdded() {
         let expected = ["APPLE"]
         let wordDictionary = StringDictionary(withStrings: ["Apple", "apple", "APPLE"], preserveCase: true)

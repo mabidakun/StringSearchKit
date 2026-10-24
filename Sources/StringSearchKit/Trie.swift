@@ -80,7 +80,7 @@ class Trie {
 
         let values: NSMutableSet = NSMutableSet()
 
-        let word = prefix.normalized()
+        let word = prefix.normalizedPrefix()
         strings(withPrefixWord: word,
                 prefix: word,
                 node: head,

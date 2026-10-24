@@ -135,8 +135,9 @@ public class StringDictionary: StringDictionaryType {
     /// returned strings retain their original casing; otherwise they are
     /// lowercased.
     ///
-    /// - Parameter prefix: The prefix to match against. Pass an empty string
-    ///   (the default) to return all strings in the dictionary.
+    /// - Parameter prefix: The prefix to match against. Leading whitespace is
+    ///   ignored; trailing whitespace is part of the prefix. Pass an empty
+    ///   string (the default) to return all strings in the dictionary.
     /// - Returns: An array of matching strings, which may be empty.
     public func strings(withPrefix prefix: String = "") -> [String] {
         let results = stringStore.strings(withPrefix: prefix)
